@@ -13,4 +13,10 @@ class Promo extends Model
     protected $fillable = [
         'title','description','discount_type','amount','starts_at','ends_at','is_active'
     ];
+
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
+        'is_active' => 'boolean',
+    ];
 }

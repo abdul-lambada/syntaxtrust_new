@@ -300,56 +300,138 @@
             SyntaxTrust. All rights reserved.</div>
     </footer>
 
-    <!-- Promo/Discount Popup -->
-    <div x-data="{
-        open: false,
-        dont: false,
-        promoEndsAt: new Date('2025-12-31T23:59:59').getTime(),
-        shouldOpen() { try { const t = Number(localStorage.getItem('promoDismissUntil')); const now = Date.now(); if (now > this.promoEndsAt) return false; return (!t || now > t); } catch (e) { return true } },
-        dismiss() { if (this.dont) { try { localStorage.setItem('promoDismissUntil', String(Date.now() + 24 * 60 * 60 * 1000)); } catch (e) {} } this.open = false; }
-    }" x-init="(() => { if (shouldOpen()) { setTimeout(() => open = true, 600); } })()">
-        <div x-show="open" x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0" class="fixed inset-0 z-100 bg-black/50"></div>
-        <div x-show="open" x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 translate-y-3 scale-95"
-            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-            x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-            x-transition:leave-end="opacity-0 translate-y-3 scale-95"
-            class="fixed inset-0 z-110 grid place-items-center p-4" role="dialog" aria-modal="true">
-            <div class="w-full max-w-md rounded-2xl bg-white shadow-2xl border border-neutral-200 overflow-hidden">
+    <!-- Promo/Discount Popup (Dynamic) -->
+    @if (isset($promo) && $promo)
+        <div x-data="{
+            open: false,
+            dont: false,
+            promoId: '{{ $promo->id }}',
+            promoEndsAt: new Date('{{ $promo->ends_at?->toIso8601String() ?? now()->addDays(7)->toIso8601String() }}').getTime(),
+            shouldOpen() {
+                try {
+                    const dismissed = localStorage.getItem('promo_dismissed_' + this.promoId);
+                    const now = Date.now();
+                    if (dismissed && now < Number(dismissed)) return false;
+                    if (now > this.promoEndsAt) return false;
+                    return true;
+                } catch (e) { return true }
+            },
+            dismiss() {
+                if (this.dont) {
+                    try {
+                        localStorage.setItem('promo_dismissed_' + this.promoId, String(Date.now() + 24 * 60 * 60 * 1000));
+                    } catch (e) {}
+                }
+                this.open = false;
+            }
+        }" x-init="(() => { if (shouldOpen()) { setTimeout(() => open = true, 1500); } })()">
+            <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" class="fixed inset-0 z-100 bg-slate-900/60 backdrop-blur-sm"
+                @click="dismiss()"></div>
+
+            <div x-show="open"
+                x-transition:enter="transition ease-out duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+                x-transition:enter-start="opacity-0 translate-y-12 scale-90"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="fixed inset-0 z-110 grid place-items-center p-4 pointer-events-none" role="dialog"
+                aria-modal="true">
+
                 <div
-                    class="bg-linear-to-r from-indigo-600 to-violet-600 text-white px-5 py-3 flex items-center justify-between">
-                    <div class="font-semibold">Promo Spesial</div>
-                    <button @click="dismiss()" aria-label="Tutup"
-                        class="h-8 w-8 grid place-items-center rounded-md hover:bg-white/10">✕</button>
-                </div>
-                <div class="p-5 space-y-4">
-                    <div class="text-lg font-semibold">Diskon hingga 15% untuk project pertama!</div>
-                    <p class="text-sm text-neutral-600">Klaim promo ini dengan menjadwalkan pertemuan atau chat
-                        WhatsApp sekarang. Berlaku terbatas.</p>
-                    <div class="flex gap-3">
-                        <button
-                            @click="dismiss(); document.querySelector('#jadwal')?.scrollIntoView({behavior:'smooth'})"
-                            class="flex-1 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500">Jadwalkan
-                            Sekarang</button>
-                        <button
-                            @click="window.open(`https://wa.me/${window.WHATSAPP_NUMBER||'6285156553226'}?text=Halo%20SyntaxTrust%2C%20saya%20ingin%20klaim%20promo`, '_blank'); dismiss();"
-                            class="flex-1 px-4 py-2 rounded-lg border border-neutral-300 hover:bg-neutral-50">Chat
-                            WhatsApp</button>
+                    class="w-full max-w-[440px] rounded-[32px] bg-white shadow-[0_32px_64px_-16px_rgba(79,70,229,0.4)] border border-neutral-100 overflow-hidden pointer-events-auto relative">
+                    <!-- Header with Gradient and Micro-animation -->
+                    <div
+                        class="bg-linear-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white p-8 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+
+                        <div
+                            class="inline-flex items-center justify-center bg-white/20 backdrop-blur-md rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] mb-4 border border-white/10 animate-pulse">
+                            Saran Penawaran
+                        </div>
+
+                        <h3 class="text-3xl font-extrabold tracking-tight leading-tight mb-2">{{ $promo->title }}</h3>
+                        <div class="h-1 w-12 bg-amber-400 mx-auto rounded-full mb-4"></div>
                     </div>
-                    <label class="mt-2 inline-flex items-center gap-2 text-xs text-neutral-600 select-none">
-                        <input type="checkbox" x-model="dont" class="rounded border-neutral-300">
-                        Jangan tampil lagi hari ini
-                    </label>
-                    <div class="text-[11px] text-neutral-400">Berlaku s/d <span
-                            x-text="new Date(promoEndsAt).toLocaleDateString('id-ID')"></span></div>
+
+                    <div class="p-8 space-y-6">
+                        <div class="relative">
+                            <div class="absolute -left-4 -top-4 text-6xl text-indigo-50 opacity-50 font-serif">“</div>
+                            <p class="text-neutral-600 leading-relaxed relative z-10 italic">
+                                {{ $promo->description }}
+                            </p>
+                        </div>
+
+                        <div class="bg-indigo-50/50 rounded-2xl p-4 border border-indigo-100 flex items-center gap-4">
+                            <div
+                                class="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl">
+                                🎁
+                            </div>
+                            <div>
+                                <div class="text-xs text-indigo-600 font-bold uppercase tracking-wider">Potongan Harga
+                                </div>
+                                <div class="text-lg font-bold text-neutral-900">
+                                    @if ($promo->discount_type === 'percent')
+                                        Diskon {{ number_format($promo->amount, 0) }}%
+                                    @else
+                                        Potongan Rp {{ number_format($promo->amount, 0, ',', '.') }}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <a href="https://wa.me/{{ preg_replace('/\D/', '', $__setting->whatsapp ?? '6285156553226') }}?text={{ urlencode('Halo SyntaxTrust, saya ingin klaim ' . $promo->title) }}"
+                                @click="dismiss()" target="_blank"
+                                class="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition-all hover:-translate-y-1 shadow-xl shadow-indigo-200">
+                                <span>Klaim Via WhatsApp</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <button @click="dismiss()"
+                                class="w-full py-3 rounded-xl border border-neutral-200 text-neutral-500 font-medium hover:bg-neutral-50 transition-colors">
+                                Nanti Saja
+                            </button>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-neutral-100">
+                            <label
+                                class="inline-flex items-center gap-2 text-xs text-neutral-400 cursor-pointer group">
+                                <input type="checkbox" x-model="dont"
+                                    class="rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500">
+                                <span class="group-hover:text-neutral-600 transition-colors">Jangan tampilkan
+                                    lagi</span>
+                            </label>
+                            <div class="text-[10px] font-bold text-neutral-300 uppercase tracking-widest">
+                                Ends: <span
+                                    x-text="new Date(promoEndsAt).toLocaleDateString('id-ID', {day:'numeric', month:'short'})"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Close Button Floating -->
+                    <button @click="dismiss()"
+                        class="absolute top-4 right-4 h-10 w-10 rounded-full bg-black/10 text-white flex items-center justify-center hover:bg-black/20 transition-colors z-20"
+                        aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path d="M18 6 6 18M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <!-- Back to top -->
     <button x-data="{ show: false }" @scroll.window="show = window.scrollY > 300" x-show="show"
