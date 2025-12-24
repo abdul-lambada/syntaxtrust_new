@@ -11,6 +11,7 @@ use App\Models\ContactInfo;
 use App\Models\Promo;
 use App\Models\Technology;
 use App\Models\Project;
+use App\Models\PricingPackage;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ class HomeController extends Controller
     {
         $services = Service::query()->where('is_active', true)->orderBy('order')->get();
         $projects = Project::query()->where('is_active', true)->orderBy('order')->get();
+        $packages = PricingPackage::query()->where('is_active', true)->orderBy('order')->get();
         $process = ProcessStep::query()->where('is_active', true)->orderBy('order')->get();
         $technologies = Technology::query()->where('is_active', true)->orderBy('order')->get();
         $timeline = TimelineStep::query()->where('is_active', true)->orderBy('order')->get();
@@ -59,6 +61,6 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        return view('home', compact('services', 'projects', 'process', 'technologies', 'timeline', 'testimonials', 'testimonialItems', 'faqs', 'contacts', 'promo', 'happyClients', 'avgSatisfaction', 'projectsCount', 'yearsExperience', 'servedCities'));
+        return view('home', compact('services', 'projects', 'process', 'technologies', 'timeline', 'testimonials', 'testimonialItems', 'faqs', 'contacts', 'promo', 'happyClients', 'avgSatisfaction', 'projectsCount', 'yearsExperience', 'servedCities', 'packages'));
     }
 }

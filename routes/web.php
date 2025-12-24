@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\PricingPackageController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -40,5 +41,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::resource('technologies', TechnologyController::class)->except(['show']);
         Route::resource('settings', SiteSettingController::class)->except(['show']);
         Route::resource('projects', ProjectController::class)->except(['show']);
+        Route::resource('pricing', PricingPackageController::class)->except(['show']);
     });
 });

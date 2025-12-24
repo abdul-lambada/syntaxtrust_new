@@ -102,8 +102,12 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.projects.index') }}"><i
                                 class="menu-icon mdi mdi-folder-multiple"></i><span
                                 class="menu-title">Portofolio</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.pricing.index') }}"><i
+                                class="menu-icon mdi mdi-cash-multiple"></i><span class="menu-title">Paket
+                                Harga</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.timeline.index') }}"><i
-                                class="menu-icon mdi mdi-timeline"></i><span class="menu-title">Tahapan</span></a></li>
+                                class="menu-icon mdi mdi-timeline"></i><span class="menu-title">Tahapan</span></a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.technologies.index') }}"><i
                                 class="menu-icon fa fa-tasks"></i><span class="menu-title">Teknologi</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.process.index') }}"><i
