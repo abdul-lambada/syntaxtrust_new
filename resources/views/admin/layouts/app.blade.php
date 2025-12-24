@@ -85,13 +85,13 @@
                     </li>
                     <li class="nav-item nav-category">Konten</li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.services.index') }}"><i
-                                class="menu-icon mdi mdi-briefcase"></i><span class="menu-title">Services</span></a>
+                                class="menu-icon mdi mdi-briefcase"></i><span class="menu-title">Layanan</span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.projects.index') }}"><i
                                 class="menu-icon mdi mdi-folder-multiple"></i><span
                                 class="menu-title">Portofolio</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.timeline.index') }}"><i
-                                class="menu-icon mdi mdi-timeline"></i><span class="menu-title">Timeline</span></a></li>
+                                class="menu-icon mdi mdi-timeline"></i><span class="menu-title">Tahapan</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.technologies.index') }}"><i
                                 class="menu-icon fa fa-tasks"></i><span class="menu-title">Teknologi</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.process.index') }}"><i
@@ -110,11 +110,11 @@
                                 class="menu-icon mdi mdi-tag"></i><span class="menu-title">Promo</span></a></li>
                     <li class="nav-item nav-category">Pengaturan</li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i
-                                class="menu-icon mdi mdi-cog"></i><span class="menu-title">Site Settings</span></a>
+                                class="menu-icon mdi mdi-cog"></i><span class="menu-title">Pengaturan Situs</span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.meeting-requests.index') }}"><i
-                                class="menu-icon mdi mdi-calendar"></i><span class="menu-title">Meeting
-                                Requests</span></a></li>
+                                class="menu-icon mdi mdi-calendar"></i><span class="menu-title">Permintaan
+                                Jadwal</span></a></li>
                 </ul>
             </nav>
 

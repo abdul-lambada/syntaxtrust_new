@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card card-rounded">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $service->exists ? 'Edit Service' : 'Tambah Service' }}</h4>
+                    <h4 class="card-title">{{ $service->exists ? 'Edit Layanan' : 'Tambah Layanan' }}</h4>
 
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ $service->exists ? route('admin.services.update', $service) : route('admin.services.store') }}">

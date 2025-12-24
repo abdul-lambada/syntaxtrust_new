@@ -9,7 +9,7 @@
             <div class="card card-rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title">Portofolio (Projects)</h4>
+                        <h4 class="card-title">Daftar Portofolio</h4>
                         <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Tambah</a>
                     </div>
                     <form method="GET" class="mb-3">
@@ -84,7 +84,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Hapus Project</h5>
+                    <h5 class="modal-title">Hapus Portofolio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

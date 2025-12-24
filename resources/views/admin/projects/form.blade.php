@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card card-rounded">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $project->exists ? 'Edit Project' : 'Tambah Project' }}</h4>
+                    <h4 class="card-title">{{ $project->exists ? 'Edit Portofolio' : 'Tambah Portofolio' }}</h4>
 
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ $project->exists ? route('admin.projects.update', $project) : route('admin.projects.store') }}">
