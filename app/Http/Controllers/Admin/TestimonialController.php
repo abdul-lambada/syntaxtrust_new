@@ -35,9 +35,7 @@ class TestimonialController extends Controller
     {
         $data = $this->validateData($request);
         if ($request->hasFile('avatar_file')) {
-            $path = $request->file('avatar_file')->store('uploads/testimonials','public');
-            // store relative path; views will resolve with Storage::url when needed
-            $data['avatar_url'] = $path;
+            $data['avatar'] = $request->file('avatar_file')->store('uploads/testimonials','public');
         }
         Testimonial::create($data);
         return redirect()->route('admin.testimonials.index')->with('ok','Testimoni dibuat.');
@@ -53,9 +51,7 @@ class TestimonialController extends Controller
     {
         $data = $this->validateData($request);
         if ($request->hasFile('avatar_file')) {
-            $path = $request->file('avatar_file')->store('uploads/testimonials','public');
-            // store relative path; views will resolve to public URL
-            $data['avatar_url'] = $path;
+            $data['avatar'] = $request->file('avatar_file')->store('uploads/testimonials','public');
         }
         $testimonial->update($data);
         return redirect()->route('admin.testimonials.index')->with('ok','Testimoni diperbarui.');
@@ -72,7 +68,7 @@ class TestimonialController extends Controller
         return $request->validate([
             'author_name' => ['required','max:150'],
             'author_role' => ['nullable','max:150'],
-            'avatar_url' => ['nullable','max:255'],
+            'avatar' => ['nullable','max:255'],
             'avatar_file' => ['nullable','image','max:2048'],
             'content' => ['required'],
             'rating' => ['nullable','integer','min:1','max:5'],

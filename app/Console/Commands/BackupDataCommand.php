@@ -37,6 +37,7 @@ class BackupDataCommand extends Command
             'contact_infos',
             'promos',
             'site_settings',
+            'projects',
         ];
 
         $backup = [];

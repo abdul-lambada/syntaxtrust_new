@@ -10,6 +10,7 @@ use App\Models\Faq;
 use App\Models\ContactInfo;
 use App\Models\Promo;
 use App\Models\Technology;
+use App\Models\Project;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -19,14 +20,15 @@ class HomeController extends Controller
     public function index()
     {
         $services = Service::query()->where('is_active', true)->orderBy('order')->get();
+        $projects = Project::query()->where('is_active', true)->orderBy('order')->get();
         $process = ProcessStep::query()->where('is_active', true)->orderBy('order')->get();
         $technologies = Technology::query()->where('is_active', true)->orderBy('order')->get();
         $timeline = TimelineStep::query()->where('is_active', true)->orderBy('order')->get();
         $testimonials = Testimonial::query()->where('is_active', true)->orderBy('order')->get();
         $testimonialItems = $testimonials->map(function($tm){
-            $avatar = $tm->avatar_url;
-            if ($avatar && !Str::startsWith($avatar, ['http://','https://','/'])) {
-                $avatar = Storage::url($avatar);
+            $avatar = null;
+            if ($tm->avatar) {
+                $avatar = Storage::url($tm->avatar);
             }
             return [
                 'name' => $tm->author_name,
@@ -57,6 +59,6 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        return view('home', compact('services','process','technologies','timeline','testimonials','testimonialItems','faqs','contacts','promo','happyClients','avgSatisfaction','projectsCount','yearsExperience'));
+        return view('home', compact('services','projects','process','technologies','timeline','testimonials','testimonialItems','faqs','contacts','promo','happyClients','avgSatisfaction','projectsCount','yearsExperience'));
     }
 }

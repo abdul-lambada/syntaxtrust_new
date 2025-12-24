@@ -33,6 +33,9 @@ class TechnologyController extends Controller
         if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = isset($data['is_active']) ? (bool)$data['is_active'] : false;
         $data['color'] = $this->normalizeColor($data['color'] ?? null);
+        if ($request->hasFile('icon_file')) {
+            $data['icon'] = $request->file('icon_file')->store('uploads/technologies', 'public');
+        }
         Technology::create($data);
         return redirect()->route('admin.technologies.index')->with('ok','Teknologi dibuat.');
     }
@@ -49,6 +52,9 @@ class TechnologyController extends Controller
         if (empty($data['slug'])) $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = isset($data['is_active']) ? (bool)$data['is_active'] : false;
         $data['color'] = $this->normalizeColor($data['color'] ?? null);
+        if ($request->hasFile('icon_file')) {
+            $data['icon'] = $request->file('icon_file')->store('uploads/technologies', 'public');
+        }
         $technology->update($data);
         return redirect()->route('admin.technologies.index')->with('ok','Teknologi diperbarui.');
     }
@@ -65,6 +71,7 @@ class TechnologyController extends Controller
             'name' => ['required','max:120'],
             'slug' => ['nullable','max:150','unique:technologies,slug,'.($id ?? 'NULL').',id'],
             'icon' => ['nullable','max:255'],
+            'icon_file' => ['nullable','image','max:1024'],
             'color' => ['nullable','max:20','regex:/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/'],
             'order' => ['nullable','integer','min:0'],
             'is_active' => ['nullable','boolean'],

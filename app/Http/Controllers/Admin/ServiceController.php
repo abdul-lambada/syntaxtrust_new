@@ -43,8 +43,7 @@ class ServiceController extends Controller
         if ($request->boolean('remove_icon')) {
             $data['icon'] = null;
         } elseif ($request->hasFile('icon_file')) {
-            $path = $request->file('icon_file')->store('uploads/services','public');
-            $data['icon'] = Storage::disk('public')->url($path);
+            $data['icon'] = $request->file('icon_file')->store('uploads/services', 'public');
         }
         $service = Service::create($data);
         return redirect()->route('admin.services.index')->with('ok','Service dibuat.');
@@ -64,8 +63,7 @@ class ServiceController extends Controller
         if ($request->boolean('remove_icon')) {
             $data['icon'] = null;
         } elseif ($request->hasFile('icon_file')) {
-            $path = $request->file('icon_file')->store('uploads/services','public');
-            $data['icon'] = Storage::disk('public')->url($path);
+            $data['icon'] = $request->file('icon_file')->store('uploads/services', 'public');
         }
         $service->update($data);
         return redirect()->route('admin.services.index')->with('ok','Service diperbarui.');
