@@ -949,37 +949,6 @@
         </div>
     </section>
 
-    <!-- Statistik -->
-    <section class="bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="rounded-2xl border border-neutral-200 p-6 text-center" data-reveal x-data="statCounter({ end: {{ max(0, (int) ($projectsCount ?? 0)) }}, suffix: '+' })"
-                    x-intersect.once="start()">
-                    <div class="text-3xl font-bold transition-transform duration-300"
-                        :class="animate ? 'scale-110 text-indigo-600' : ''"><span x-text="formatted()"></span></div>
-                    <div class="mt-1 text-sm text-neutral-600">Project Selesai</div>
-                </div>
-                <div class="rounded-2xl border border-neutral-200 p-6 text-center" data-reveal x-data="statCounter({ end: {{ max(0, (int) ($happyClients ?? 0)) }}, suffix: '+' })"
-                    x-intersect.once="start()">
-                    <div class="text-3xl font-bold transition-transform duration-300"
-                        :class="animate ? 'scale-110 text-indigo-600' : ''"><span x-text="formatted()"></span></div>
-                    <div class="mt-1 text-sm text-neutral-600">Klien Puas</div>
-                </div>
-                <div class="rounded-2xl border border-neutral-200 p-6 text-center" data-reveal x-data="statCounter({ end: {{ max(1, (int) ($yearsExperience ?? 1)) }}, suffix: '+', duration: 1600 })"
-                    x-intersect.once="start()">
-                    <div class="text-3xl font-bold transition-transform duration-300"
-                        :class="animate ? 'scale-110 text-indigo-600' : ''"><span x-text="formatted()"></span></div>
-                    <div class="mt-1 text-sm text-neutral-600">Tahun Pengalaman</div>
-                </div>
-                <div class="rounded-2xl border border-neutral-200 p-6 text-center" data-reveal x-data="statCounter({ end: {{ max(0, min(100, (int) ($avgSatisfaction ?? 0))) }}, suffix: '%', duration: 1200 })"
-                    x-intersect.once="start()">
-                    <div class="text-3xl font-bold transition-transform duration-300"
-                        :class="animate ? 'scale-110 text-indigo-600' : ''"><span x-text="formatted()"></span></div>
-                    <div class="mt-1 text-sm text-neutral-600">Kepuasan Klien</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Proses Kerja -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
