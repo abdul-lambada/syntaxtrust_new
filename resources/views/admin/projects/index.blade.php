@@ -9,7 +9,7 @@
             <div class="card card-rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title">Daftar Portofolio</h4>
+                        <h4 class="card-title card-title-dash">Daftar Portofolio</h4>
                         <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Tambah</a>
                     </div>
                     <form method="GET" class="mb-3">
@@ -51,11 +51,12 @@
                                         </td>
                                         <td>{{ $item->category }}</td>
                                         <td class="text-center">
-                                            <span class="badge {{ $item->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                            <div
+                                                class="badge {{ $item->is_active ? 'badge-opacity-success' : 'badge-opacity-secondary' }}">
                                                 {{ $item->is_active ? 'Ya' : 'Tidak' }}
-                                            </span>
+                                            </div>
                                         </td>
-                                        <td class="text-center">{{ $item->order }}</td>
+                                        <td class="text-center fw-bold">{{ $item->order }}</td>
                                         <td>
                                             <a href="{{ route('admin.projects.edit', $item) }}"
                                                 class="btn btn-sm btn-outline-primary">Edit</a>

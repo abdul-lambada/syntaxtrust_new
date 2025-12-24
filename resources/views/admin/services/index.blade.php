@@ -9,7 +9,7 @@
             <div class="card card-rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title">Daftar Layanan</h4>
+                        <h4 class="card-title card-title-dash">Daftar Layanan</h4>
                         <a href="{{ route('admin.services.create') }}" class="btn btn-primary">Tambah</a>
                     </div>
                     <form method="GET" class="mb-3">

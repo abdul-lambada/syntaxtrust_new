@@ -16,7 +16,12 @@
     <link rel="stylesheet" href="{{ asset('template/dist/assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet"
         href="{{ asset('template/dist/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-    <!-- page css (optional) -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet"
+        href="{{ asset('template/dist/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/dist/assets/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('template/dist/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     @stack('page_css')
     <!-- main theme css -->
     <link rel="stylesheet" href="{{ asset('template/dist/assets/css/style.css') }}">
@@ -50,6 +55,13 @@
                 </div>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-top">
+                <ul class="navbar-nav">
+                    <li class="nav-item fw-semibold d-none d-lg-block ms-0">
+                        <h1 class="welcome-text">Halo, <span class="text-black fw-bold">{{ Auth::user()->name }}</span>
+                        </h1>
+                        <h3 class="welcome-sub-text">Ringkasan performa situs Anda minggu ini </h3>
+                    </li>
+                </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
@@ -95,7 +107,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.technologies.index') }}"><i
                                 class="menu-icon fa fa-tasks"></i><span class="menu-title">Teknologi</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.process.index') }}"><i
-                                class="menu-icon mdi mdi-clipboard-text"></i><span class="menu-title">Proses</span></a>
+                                class="menu-icon mdi mdi-clipboard-text"></i><span
+                                class="menu-title">Proses</span></a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.testimonials.index') }}"><i
                                 class="menu-icon mdi mdi-comment-text"></i><span
@@ -138,6 +151,9 @@
     <script src="{{ asset('template/dist/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="{{ asset('template/dist/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('template/dist/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('template/dist/assets/vendors/select2/select2.min.js') }}"></script>
     @stack('page_js')
     <!-- inject:js -->
     <script src="{{ asset('template/dist/assets/js/off-canvas.js') }}"></script>

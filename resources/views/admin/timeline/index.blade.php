@@ -36,8 +36,10 @@
                                         <td>{{ $items->firstItem() + $i }}</td>
                                         <td>{{ $s->title }}</td>
                                         <td>{{ $s->order }}</td>
-                                        <td><span
-                                                class="badge {{ $s->is_active ? 'bg-success' : 'bg-secondary' }}">{{ $s->is_active ? 'Ya' : 'Tidak' }}</span>
+                                        <td>
+                                            <div
+                                                class="badge {{ $s->is_active ? 'badge-opacity-success' : 'badge-opacity-secondary' }}">
+                                                {{ $s->is_active ? 'Ya' : 'Tidak' }}</div>
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.timeline.edit', $s) }}"

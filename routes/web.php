@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\MeetingRequestController;
 use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -27,7 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::middleware('auth')->group(function(){
-        Route::view('/', 'admin.dashboard')->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('services', ServiceController::class)->except(['show']);
         Route::resource('process', ProcessStepController::class)->parameters(['process' => 'process'])->except(['show']);
         Route::resource('timeline', TimelineStepController::class)->parameters(['timeline' => 'timeline'])->except(['show']);

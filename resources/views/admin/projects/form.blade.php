@@ -33,8 +33,25 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Kategori</label>
-                                <input type="text" name="category" value="{{ old('category', $project->category) }}"
-                                    class="form-control" placeholder="E.g. Web App, Mobile, UI/UX">
+                                <select name="category" class="form-control js-example-basic-single">
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach (['Web Development', 'Mobile App', 'UI/UX Design', 'Digital Marketing', 'Graphic Design'] as $cat)
+                                        <option value="{{ $cat }}"
+                                            {{ old('category', $project->category) == $cat ? 'selected' : '' }}>
+                                            {{ $cat }}</option>
+                                    @endforeach
+                                    @if (
+                                        $project->category &&
+                                            !in_array($project->category, [
+                                                'Web Development',
+                                                'Mobile App',
+                                                'UI/UX Design',
+                                                'Digital Marketing',
+                                                'Graphic Design',
+                                            ]))
+                                        <option value="{{ $project->category }}" selected>{{ $project->category }}</option>
+                                    @endif
+                                </select>
                                 @error('category')
                                     <div class="text-danger small">{{ $message }}</div>
                                 @enderror
@@ -112,4 +129,16 @@
             </div>
         </div>
     </div>
+    @push('page_js')
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2({
+                    tags: true,
+                    placeholder: "Pilih atau Ketik Kategori Baru",
+                    allowClear: true,
+                    theme: 'bootstrap'
+                });
+            });
+        </script>
+    @endpush
 @endsection
