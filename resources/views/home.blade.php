@@ -563,8 +563,110 @@
         </div>
     </section>
 
+    <!-- Angka Bicara (Statistics Counter) -->
+    <section class="py-12 bg-neutral-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Proyek Selesai -->
+                <div class="text-center" x-data="{
+                    current: 0,
+                    target: {{ $projectsCount }},
+                    init() {
+                        $nextTick(() => {
+                            let interval = setInterval(() => {
+                                if (this.current < this.target) { this.current += Math.ceil((this.target - this.current) / 10); } else {
+                                    this.current = this.target;
+                                    clearInterval(interval);
+                                }
+                            }, 50);
+                        });
+                    }
+                }" x-intersect="init()">
+                    <div
+                        class="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-2xl bg-indigo-100 text-indigo-600 shadow-sm border border-indigo-200/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center justify-center gap-0.5">
+                        <span class="text-3xl font-bold text-neutral-900" x-text="current">0</span>
+                        <span class="text-3xl font-bold text-indigo-600">+</span>
+                    </div>
+                    <p class="text-sm font-medium text-neutral-500 mt-1 uppercase tracking-wider">Proyek Selesai</p>
+                </div>
+
+                <!-- Klien Puas -->
+                <div class="text-center" x-data="{
+                    current: 0,
+                    target: {{ $happyClients }},
+                    init() {
+                        $nextTick(() => {
+                            let interval = setInterval(() => {
+                                if (this.current < this.target) { this.current += Math.ceil((this.target - this.current) / 10); } else {
+                                    this.current = this.target;
+                                    clearInterval(interval);
+                                }
+                            }, 50);
+                        });
+                    }
+                }" x-intersect="init()">
+                    <div
+                        class="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-2xl bg-emerald-100 text-emerald-600 shadow-sm border border-emerald-200/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center justify-center gap-0.5">
+                        <span class="text-3xl font-bold text-neutral-900" x-text="current">0</span>
+                        <span class="text-3xl font-bold text-emerald-600">+</span>
+                    </div>
+                    <p class="text-sm font-medium text-neutral-500 mt-1 uppercase tracking-wider">Klien Puas</p>
+                </div>
+
+                <!-- Tahun Pengalaman -->
+                <div class="text-center" x-data="{ current: 0, target: {{ $yearsExperience }}, init() { $nextTick(() => { let interval = setInterval(() => { if (this.current < this.target) { this.current += 1; } else { clearInterval(interval); } }, 200); }); } }" x-intersect="init()">
+                    <div
+                        class="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-2xl bg-amber-100 text-amber-600 shadow-sm border border-amber-200/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center justify-center gap-0.5">
+                        <span class="text-3xl font-bold text-neutral-900" x-text="current">0</span>
+                        <span class="text-3xl font-bold text-amber-600">+</span>
+                    </div>
+                    <p class="text-sm font-medium text-neutral-500 mt-1 uppercase tracking-wider">Tahun Pengalaman</p>
+                </div>
+
+                <!-- Kota Terlayani -->
+                <div class="text-center" x-data="{ current: 0, target: {{ $servedCities }}, init() { $nextTick(() => { let interval = setInterval(() => { if (this.current < this.target) { this.current += 1; } else { clearInterval(interval); } }, 100); }); } }" x-intersect="init()">
+                    <div
+                        class="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-2xl bg-cyan-100 text-cyan-600 shadow-sm border border-cyan-200/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center justify-center gap-0.5">
+                        <span class="text-3xl font-bold text-neutral-900" x-text="current">0</span>
+                        <span class="text-3xl font-bold text-cyan-600">+</span>
+                    </div>
+                    <p class="text-sm font-medium text-neutral-500 mt-1 uppercase tracking-wider">Kota Terlayani</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Teknologi yang Digunakan -->
-    <section class="bg-white" x-data="techCarousel()" x-init="init()" @mouseenter="pause()" @mouseleave="resume()">
+    <section class="bg-white" x-data="techCarousel()" x-init="init()" @mouseenter="pause()"
+        @mouseleave="resume()">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <h2 class="text-2xl font-bold text-center" data-reveal>Teknologi yang Digunakan</h2>
             <p class="mt-2 text-neutral-600 text-center" data-reveal>Stack modern untuk hasil yang optimal.</p>

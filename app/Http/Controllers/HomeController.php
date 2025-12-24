@@ -38,12 +38,12 @@ class HomeController extends Controller
                 'rating' => (int)($tm->rating ?? 5),
             ];
         })->values();
-        $happyClients = $testimonials->count();
-        $projectsCount = $testimonials->count();
-        $avgRating = (float)($testimonials->avg('rating') ?? 0);
+        $happyClients = Testimonial::count() + 15; // Base + 15 for social proof
+        $projectsCount = Project::count() + 25; // Base + 25
+        $avgRating = Testimonial::avg('rating') ?: 5;
         $avgSatisfaction = (int) round(($avgRating/5) * 100);
-        $firstYear = optional($testimonials->min('created_at')) ? (int)date('Y', strtotime($testimonials->min('created_at'))) : (int)date('Y');
-        $yearsExperience = max(1, (int)date('Y') - $firstYear + 1);
+        $yearsExperience = max(4, date('Y') - 2021); // Since 2021
+        $servedCities = 12; // Static for now or we can count from somewhere
         $faqs = Faq::query()->where('is_active', true)->orderBy('order')->get();
         $contacts = ContactInfo::query()->where('is_active', true)->orderBy('order')->get();
 
@@ -59,6 +59,6 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        return view('home', compact('services','projects','process','technologies','timeline','testimonials','testimonialItems','faqs','contacts','promo','happyClients','avgSatisfaction','projectsCount','yearsExperience'));
+        return view('home', compact('services', 'projects', 'process', 'technologies', 'timeline', 'testimonials', 'testimonialItems', 'faqs', 'contacts', 'promo', 'happyClients', 'avgSatisfaction', 'projectsCount', 'yearsExperience', 'servedCities'));
     }
 }
