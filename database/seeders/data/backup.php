@@ -1,9 +1,9 @@
 <?php
 
 return array (
-  'services' => 
+  'services' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'title' => 'Tugas Kuliah',
@@ -16,7 +16,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'title' => 'Modifikasi Website',
@@ -29,7 +29,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'title' => 'Website dari Nol',
@@ -43,9 +43,9 @@ return array (
       'updated_at' => '2025-11-11 05:04:27',
     ),
   ),
-  'process_steps' => 
+  'process_steps' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'title' => 'Diskusi Kebutuhan',
@@ -55,7 +55,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'title' => 'Perencanaan',
@@ -65,7 +65,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'title' => 'Implementasi',
@@ -75,7 +75,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    3 => 
+    3 =>
     array (
       'id' => 4,
       'title' => 'Uji & Revisi',
@@ -85,7 +85,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    4 => 
+    4 =>
     array (
       'id' => 5,
       'title' => 'Rilis',
@@ -96,9 +96,9 @@ return array (
       'updated_at' => '2025-11-11 05:04:27',
     ),
   ),
-  'timeline_steps' => 
+  'timeline_steps' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'title' => 'Kickoff',
@@ -108,7 +108,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'title' => 'Desain',
@@ -118,7 +118,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'title' => 'Development',
@@ -128,7 +128,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    3 => 
+    3 =>
     array (
       'id' => 4,
       'title' => 'QA',
@@ -138,7 +138,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    4 => 
+    4 =>
     array (
       'id' => 5,
       'title' => 'Go‑Live',
@@ -149,14 +149,14 @@ return array (
       'updated_at' => '2025-11-11 05:04:27',
     ),
   ),
-  'testimonials' => 
+  'testimonials' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'author_name' => 'Amar',
       'author_role' => 'Mahasiswa Polindra',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Sangat membantu untuk tugas kuliah. Penjelasannya jelas!',
       'rating' => 5,
       'order' => 7,
@@ -164,12 +164,12 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 12:03:25',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'author_name' => 'Guru SMK',
       'author_role' => 'Sekolah SMK AL-AMIIN',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'UI modern, mobile friendly. Penyesuaian cepat saat revisi.',
       'rating' => 5,
       'order' => 2,
@@ -177,12 +177,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:24:38',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'author_name' => 'Tri',
       'author_role' => 'Karyawan PJM',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Proses cepat dan hasil sesuai brief. Komunikasi enak.',
       'rating' => 5,
       'order' => 1,
@@ -190,12 +190,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:50:07',
     ),
-    3 => 
+    3 =>
     array (
       'id' => 4,
       'author_name' => 'Alik',
       'author_role' => 'Mahasiswa UNMA',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Integrasi fitur custom berjalan mulus dan rapi.',
       'rating' => 5,
       'order' => 3,
@@ -203,12 +203,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:50:25',
     ),
-    4 => 
+    4 =>
     array (
       'id' => 5,
       'author_name' => 'Tamala',
       'author_role' => 'Mahasiswa UNMA',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Tim responsif, timeline jelas, dan hasil rapi. Rekomended!',
       'rating' => 5,
       'order' => 4,
@@ -216,12 +216,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:50:33',
     ),
-    5 => 
+    5 =>
     array (
       'id' => 6,
       'author_name' => 'Juhansyah',
       'author_role' => 'Mahasiswa UMC',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Sangat membantu untuk skripsi saya',
       'rating' => 5,
       'order' => 5,
@@ -229,12 +229,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:50:41',
     ),
-    6 => 
+    6 =>
     array (
       'id' => 7,
       'author_name' => 'Aldy',
       'author_role' => 'Mahasiswa UMC',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Sesuai Kebutuhan dosen saya, dalam pembuat web untuk tugas kuliah',
       'rating' => 5,
       'order' => 6,
@@ -242,12 +242,12 @@ return array (
       'created_at' => '2025-11-11 07:18:03',
       'updated_at' => '2025-11-11 07:26:39',
     ),
-    7 => 
+    7 =>
     array (
       'id' => 8,
       'author_name' => 'Guru Mts',
       'author_role' => 'Mts AL-AMIIN',
-      'avatar_url' => NULL,
+      'avatar' => NULL,
       'content' => 'Website Responsive dan sesuai kebutuhan untuk web statis',
       'rating' => 5,
       'order' => 8,
@@ -256,9 +256,9 @@ return array (
       'updated_at' => '2025-11-11 12:02:08',
     ),
   ),
-  'technologies' => 
+  'technologies' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'name' => 'Laravel',
@@ -270,7 +270,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:01:56',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'name' => 'Tailwind v4',
@@ -282,7 +282,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:03:28',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'name' => 'PHP',
@@ -294,7 +294,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:06:04',
     ),
-    3 => 
+    3 =>
     array (
       'id' => 4,
       'name' => 'CodeIgniter',
@@ -306,7 +306,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:07:01',
     ),
-    4 => 
+    4 =>
     array (
       'id' => 5,
       'name' => 'Axios',
@@ -318,7 +318,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:08:11',
     ),
-    5 => 
+    5 =>
     array (
       'id' => 6,
       'name' => 'MySQL',
@@ -330,7 +330,7 @@ return array (
       'created_at' => '2025-11-11 08:07:10',
       'updated_at' => '2025-11-11 09:08:36',
     ),
-    6 => 
+    6 =>
     array (
       'id' => 7,
       'name' => 'Bootstrap',
@@ -342,7 +342,7 @@ return array (
       'created_at' => '2025-11-11 08:10:08',
       'updated_at' => '2025-11-11 09:09:20',
     ),
-    7 => 
+    7 =>
     array (
       'id' => 9,
       'name' => 'React',
@@ -354,7 +354,7 @@ return array (
       'created_at' => '2025-11-11 08:11:14',
       'updated_at' => '2025-11-11 09:09:50',
     ),
-    8 => 
+    8 =>
     array (
       'id' => 10,
       'name' => 'Nuxt3',
@@ -366,7 +366,7 @@ return array (
       'created_at' => '2025-11-11 08:11:36',
       'updated_at' => '2025-11-11 09:10:23',
     ),
-    9 => 
+    9 =>
     array (
       'id' => 11,
       'name' => 'Vue',
@@ -379,9 +379,9 @@ return array (
       'updated_at' => '2025-11-11 09:10:48',
     ),
   ),
-  'faqs' => 
+  'faqs' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'question' => 'Berapa lama pembuatan website?',
@@ -392,7 +392,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'question' => 'Apakah bisa revisi?',
@@ -403,7 +403,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    2 => 
+    2 =>
     array (
       'id' => 3,
       'question' => 'Metode meeting?',
@@ -415,9 +415,9 @@ return array (
       'updated_at' => '2025-11-11 05:04:27',
     ),
   ),
-  'contact_infos' => 
+  'contact_infos' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'type' => 'email',
@@ -428,7 +428,7 @@ return array (
       'created_at' => '2025-11-11 05:04:27',
       'updated_at' => '2025-11-11 05:04:27',
     ),
-    1 => 
+    1 =>
     array (
       'id' => 2,
       'type' => 'whatsapp',
@@ -440,9 +440,9 @@ return array (
       'updated_at' => '2025-11-11 05:04:27',
     ),
   ),
-  'promos' => 
+  'promos' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'title' => 'Diskon Project Pertama',
@@ -456,9 +456,9 @@ return array (
       'updated_at' => '2025-11-11 07:08:37',
     ),
   ),
-  'site_settings' => 
+  'site_settings' =>
   array (
-    0 => 
+    0 =>
     array (
       'id' => 1,
       'site_name' => 'SyntaxTrust',
