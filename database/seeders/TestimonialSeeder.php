@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Testimonial;
 
 class TestimonialSeeder extends Seeder
 {
@@ -12,71 +12,45 @@ class TestimonialSeeder extends Seeder
      */
     public function run(): void
     {
+        Testimonial::truncate();
+
         $data = [
             [
-                'author_name' => 'Raka',
-                'author_role' => 'Mahasiswa',
-                'avatar_url' => null,
-                'content' => 'Proses cepat dan hasil sesuai brief. Komunikasi enak.',
+                'author_name' => 'Aditya Pratama',
+                'author_role' => 'Mahasiswa Tingkat Akhir',
+                'content' => 'Sangat terbantu untuk pengerjaan project skripsi saya. Penjelasannya sangat detail sehingga saya bisa lancar saat presentasi di depan dosen penguji.',
                 'rating' => 5,
                 'order' => 1,
                 'is_active' => true,
             ],
             [
-                'author_name' => 'Dina',
-                'author_role' => 'UMKM',
-                'avatar_url' => null,
-                'content' => 'UI modern, mobile friendly. Penyesuaian cepat saat revisi.',
+                'author_name' => 'Dina Amalia',
+                'author_role' => 'Owner Kedai Kopi',
+                'content' => 'Tampilan website kafe saya jadi jauh lebih modern dan profesional. Tim SyntaxTrust sangat responsif saat diajak diskusi konsep desain.',
                 'rating' => 5,
                 'order' => 2,
                 'is_active' => true,
             ],
             [
-                'author_name' => 'Fajar',
-                'author_role' => 'Freelancer',
-                'avatar_url' => null,
-                'content' => 'Integrasi fitur custom berjalan mulus dan rapi.',
+                'author_name' => 'Fajar Setiawan',
+                'author_role' => 'Project Manager',
+                'content' => 'Integrasi API dan fitur custom backend-nya berjalan mulus. Kodingannya rapi (clean code) sehingga sangat mudah untuk kami maintenance ke depannya.',
                 'rating' => 5,
                 'order' => 3,
                 'is_active' => true,
             ],
             [
-                'author_name' => 'Sinta',
-                'author_role' => 'Owner Toko Online',
-                'avatar_url' => null,
-                'content' => 'Tim responsif, timeline jelas, dan hasil rapi. Rekomended!',
+                'author_name' => 'Sinta Wijaya',
+                'author_role' => 'Brand Owner',
+                'content' => 'Tim yang sangat bisa diandalkan. Timeline pengerjaan jelas dan hasil akhirnya melampaui ekspektasi kami. Benar-benar jasa web terbaik!',
                 'rating' => 5,
                 'order' => 4,
-                'is_active' => true,
-            ],
-            [
-                'author_name' => 'Budi',
-                'author_role' => 'Konsultan',
-                'avatar_url' => null,
-                'content' => 'Perbaikan performa signifikan, skor Lighthouse meningkat.',
-                'rating' => 5,
-                'order' => 5,
-                'is_active' => true,
-            ],
-            [
-                'author_name' => 'Maya',
-                'author_role' => 'Pemilik Kafe',
-                'avatar_url' => null,
-                'content' => 'Desain sesuai brand, mudah dikelola dan SEO dasar sudah siap.',
-                'rating' => 5,
-                'order' => 6,
                 'is_active' => true,
             ],
         ];
 
         foreach ($data as $row) {
-            DB::table('testimonials')->updateOrInsert([
-                'author_name' => $row['author_name'],
-                'order' => $row['order'],
-            ], $row + [
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            Testimonial::create($row);
         }
     }
 }

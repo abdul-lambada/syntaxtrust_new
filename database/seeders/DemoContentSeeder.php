@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,77 +15,110 @@ class DemoContentSeeder extends Seeder
     {
         // Services
         $services = [
-            ['title' => 'Tugas Kuliah', 'excerpt' => 'Bantu pengerjaan website untuk tugas kuliah', 'description' => 'Pengerjaan cepat, rapi, dan dapat dijelaskan saat presentasi.', 'icon' => 'graduation-cap', 'order' => 1],
-            ['title' => 'Modifikasi Website', 'excerpt' => 'Perbaikan/penambahan fitur pada website', 'description' => 'Refactor, bugfix, peningkatan UI/UX, dan integrasi kecil.', 'icon' => 'wrench', 'order' => 2],
-            ['title' => 'Website dari Nol', 'excerpt' => 'Membangun website baru end-to-end', 'description' => 'Analisis kebutuhan, desain, implementasi, hingga deploy.', 'icon' => 'rocket', 'order' => 3],
+            [
+                'title' => 'E-Learning & Portfolio',
+                'excerpt' => 'Solusi website pendidikan dan pameran karya profesional.',
+                'description' => 'Membangun platform pembelajaran interaktif atau portofolio digital yang memukau untuk meningkatkan personal branding atau kredibilitas institusi Anda.',
+                'icon' => null,
+                'order' => 1
+            ],
+            [
+                'title' => 'Custom Web Application',
+                'excerpt' => 'Sistem kustom berbasis web untuk kebutuhan bisnis spesifik.',
+                'description' => 'Solusi perangkat lunak berbasis cloud yang dikembangkan khusus sesuai alur kerja bisnis Anda, mulai dari sistem inventaris hingga manajemen data kompleks.',
+                'icon' => null,
+                'order' => 2
+            ],
+            [
+                'title' => 'Modifikasi & Refactor',
+                'excerpt' => 'Modernisasi dan peningkatan fitur website yang sudah ada.',
+                'description' => 'Memperbaiki bug, meningkatkan kecepatan akses, mengganti desain lama dengan UI modern, hingga integrasi API baru ke dalam sistem yang sudah berjalan.',
+                'icon' => null,
+                'order' => 3
+            ],
         ];
         foreach ($services as $s) {
-            DB::table('services')->updateOrInsert(['slug' => Str::slug($s['title'])], $s + ['slug' => Str::slug($s['title']), 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+            DB::table('services')->updateOrInsert(
+                ['slug' => Str::slug($s['title'])],
+                array_merge($s, [
+                    'slug' => Str::slug($s['title']),
+                    'is_active' => true,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ])
+            );
         }
 
         // Process steps
         $process = [
-            ['title' => 'Diskusi Kebutuhan', 'description' => 'Memahami scope dan tujuan proyek', 'order' => 1],
-            ['title' => 'Perencanaan', 'description' => 'Menyusun rencana kerja dan timeline', 'order' => 2],
-            ['title' => 'Implementasi', 'description' => 'Pengembangan fitur inti dan antarmuka', 'order' => 3],
-            ['title' => 'Uji & Revisi', 'description' => 'Pengujian, perbaikan, dan penyempurnaan', 'order' => 4],
-            ['title' => 'Rilis', 'description' => 'Deploy dan serah terima', 'order' => 5],
+            ['title' => 'Discovery', 'description' => 'Bedah kebutuhan dan tujuan bisnis Anda.', 'order' => 1],
+            ['title' => 'Strategy', 'description' => 'Menyusun alur kerja dan teknologi yang tepat.', 'order' => 2],
+            ['title' => 'Development', 'description' => 'Proses koding dengan standar kualitas tinggi.', 'order' => 3],
+            ['title' => 'Final QA', 'description' => 'Pengujian menyeluruh sebelum meluncur.', 'order' => 4],
+            ['title' => 'Deployment', 'description' => 'Website siap diakses oleh publik.', 'order' => 5],
         ];
-        foreach ($process as $i => $p) {
-            DB::table('process_steps')->updateOrInsert(['order' => $p['order']], $p + ['is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+        foreach ($process as $p) {
+            DB::table('process_steps')->updateOrInsert(
+                ['order' => $p['order']],
+                array_merge($p, ['is_active' => true, 'created_at' => now(), 'updated_at' => now()])
+            );
         }
 
         // Timeline steps
         $timeline = [
-            ['title' => 'Kickoff', 'description' => 'Konfirmasi kebutuhan & akses', 'order' => 1],
-            ['title' => 'Desain', 'description' => 'Wireframe/Hi‑Fi & feedback', 'order' => 2],
-            ['title' => 'Development', 'description' => 'Frontend + backend', 'order' => 3],
-            ['title' => 'QA', 'description' => 'Testing fungsional & UX', 'order' => 4],
-            ['title' => 'Go‑Live', 'description' => 'Deploy & monitoring', 'order' => 5],
+            ['title' => 'Analisis', 'description' => 'Pengumpulan data & dokumen.', 'order' => 1],
+            ['title' => 'Desain UI/UX', 'description' => 'Mockup & purwarupa visual.', 'order' => 2],
+            ['title' => 'Koding', 'description' => 'Pembangunan sistem inti.', 'order' => 3],
+            ['title' => 'Review', 'description' => 'Umpan balik & perbaikan.', 'order' => 4],
+            ['title' => 'Serah Terima', 'description' => 'Pelatihan & penyerahan aset.', 'order' => 5],
         ];
         foreach ($timeline as $t) {
-            DB::table('timeline_steps')->updateOrInsert(['order' => $t['order']], $t + ['is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
-        }
-
-        // Testimonials
-        $testimonials = [
-            ['author_name' => 'Rizky', 'author_role' => 'Mahasiswa', 'content' => 'Sangat membantu untuk tugas kuliah. Penjelasannya jelas!', 'rating' => 5, 'order' => 1],
-            ['author_name' => 'Dina', 'author_role' => 'Owner UMKM', 'content' => 'Website cepat jadi dan tampilannya modern.', 'rating' => 5, 'order' => 2],
-        ];
-        foreach ($testimonials as $t) {
-            DB::table('testimonials')->updateOrInsert(['author_name' => $t['author_name'], 'order' => $t['order']], $t + ['is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+            DB::table('timeline_steps')->updateOrInsert(
+                ['order' => $t['order']],
+                array_merge($t, ['is_active' => true, 'created_at' => now(), 'updated_at' => now()])
+            );
         }
 
         // FAQs
         $faqs = [
-            ['question' => 'Berapa lama pembuatan website?', 'answer' => 'Tergantung scope. Landing page 3‑7 hari kerja.', 'category' => 'Umum', 'order' => 1],
-            ['question' => 'Apakah bisa revisi?', 'answer' => 'Bisa, termasuk 1‑2 kali revisi ringan.', 'category' => 'Umum', 'order' => 2],
-            ['question' => 'Metode meeting?', 'answer' => 'Google Meet atau WhatsApp call sesuai preferensi.', 'category' => 'Meeting', 'order' => 3],
+            ['question' => 'Mengapa memilih SyntaxTrust?', 'answer' => 'Kami mengutamakan kualitas koding yang bersih (clean code) dan desain premium yang memberikan kesan profesional pada bisnis Anda.', 'category' => 'Umum', 'order' => 1],
+            ['question' => 'Berapa biaya jasa pembuatannya?', 'answer' => 'Biaya sangat fleksibel tergantung kompleksitas fitur. Kami terbuka untuk negosiasi sesuai anggaran yang Anda miliki.', 'category' => 'Biaya', 'order' => 2],
+            ['question' => 'Apakah ada dukungan pasca rilis?', 'answer' => 'Ya, kami memberikan dukungan teknis gratis selama 30 hari setelah peluncuran untuk memastikan website berjalan lancar.', 'category' => 'Support', 'order' => 3],
         ];
         foreach ($faqs as $f) {
-            DB::table('faqs')->updateOrInsert(['question' => $f['question']], $f + ['is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+            DB::table('faqs')->updateOrInsert(
+                ['question' => $f['question']],
+                array_merge($f, ['is_active' => true, 'created_at' => now(), 'updated_at' => now()])
+            );
         }
 
         // Contact infos
         $contacts = [
-            ['type' => 'email', 'label' => 'Email', 'value' => 'engineertekno@gmail.com', 'order' => 1],
-            ['type' => 'whatsapp', 'label' => 'WhatsApp', 'value' => '6285156553226', 'order' => 2],
+            ['type' => 'email', 'label' => 'Email Resmi', 'value' => 'engineertekno@gmail.com', 'order' => 1],
+            ['type' => 'whatsapp', 'label' => 'Customer Service', 'value' => '6285156553226', 'order' => 2],
+            ['type' => 'instagram', 'label' => 'Instagram', 'value' => '@syntaxtrust', 'order' => 3],
         ];
         foreach ($contacts as $c) {
-            DB::table('contact_infos')->updateOrInsert(['type' => $c['type']], $c + ['is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+            DB::table('contact_infos')->updateOrInsert(
+                ['type' => $c['type']],
+                array_merge($c, ['is_active' => true, 'created_at' => now(), 'updated_at' => now()])
+            );
         }
 
-        // Promo contoh
-        DB::table('promos')->updateOrInsert(['title' => 'Diskon Project Pertama'], [
-            'title' => 'Diskon Project Pertama',
-            'description' => 'Diskon hingga 15% untuk project pertama, klaim via jadwal/WA.',
-            'discount_type' => 'percent',
-            'amount' => 15,
-            'starts_at' => now()->subDay(),
-            'ends_at' => now()->addMonth(),
-            'is_active' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Active Promo
+        DB::table('promos')->updateOrInsert(
+            ['title' => 'New Year Launch Offer'],
+            [
+                'title' => 'New Year Launch Offer',
+                'description' => 'Dapatkan potongan harga hingga 20% untuk paket kustom website selama bulan Januari.',
+                'discount_type' => 'percent',
+                'amount' => 20,
+                'starts_at' => now()->startOfMonth(),
+                'ends_at' => now()->endOfMonth(),
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }
