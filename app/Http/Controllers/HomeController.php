@@ -75,6 +75,6 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        return view('project.show', compact('project', 'otherProjects'));
+        return view('show', compact('project', 'otherProjects'));
     }
 }
