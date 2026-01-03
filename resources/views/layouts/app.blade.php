@@ -574,7 +574,7 @@
     <!-- Back to top -->
     <button x-data="{ show: false }" @scroll.window="show = window.scrollY > 300" x-show="show"
         @click="window.scrollTo({top:0, behavior:'smooth'})"
-        class="hidden sm:inline-flex fixed bottom-5 right-5 z-50 mr-16 h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:shadow transition"
+        class="hidden sm:inline-flex fixed bottom-5 right-5 z-50 h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:shadow transition"
         aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             class="h-5 w-5">
@@ -582,24 +582,7 @@
         </svg>
     </button>
 
-    <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/6285156553226?text=Halo%20SyntaxTrust%2C%20saya%20ingin%20tanya-tanya%20tentang%20pembuatan%20website"
-        target="_blank"
-        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group bg-[#25D366] text-white px-4 py-3 rounded-full shadow-[0_10px_25px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(37,211,102,0.6)] hover:-translate-y-1 transition-all duration-300 active:scale-95"
-        aria-label="Chat WhatsApp">
-        <div class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-                <path
-                    d="M20.52 3.48A11.94 11.94 0 0 0 12.05 0C5.44 0 .1 5.34.1 11.94c0 2.1.55 4.13 1.58 5.94L0 24l6.27-1.64a12.02 12.02 0 0 0 5.78 1.47h.01c6.6 0 11.94-5.34 11.94-11.94 0-3.19-1.24-6.19-3.48-8.41ZM12.05 22.1h-.01a10.2 10.2 0 0 1-5.2-1.44l-.37-.22-3.72.97.99-3.63-.24-.37a10.17 10.17 0 0 1-1.6-5.47c0-5.62 4.58-10.2 10.21-10.2 2.73 0 5.29 1.06 7.22 2.99a10.14 10.14 0 0 1 2.98 7.21c0 5.63-4.57 10.2-10.21 10.2Zm5.84-7.65c-.32-.16-1.9-.94-2.2-1.04-.29-.1-.5-.16-.72.16-.21.32-.83 1.03-1.02 1.25-.19.21-.38.24-.7.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.57-1.88-1.76-2.2-.18-.32-.02-.49.14-.65.15-.15.32-.38.48-.57.16-.19.21-.32.32-.54.11-.21.05-.4-.02-.56-.16-.16-.71-1.7-.97-2.32-.25-.6-.51-.52-.72-.53l-.61-.01c-.21 0-.55.08-.83.4-.29.32-1.1 1.08-1.1 2.63 0 1.54 1.13 3.03 1.28 3.24.16.21 2.22 3.4 5.38 4.76.75.32 1.33.51 1.79.66.75.24 1.43.2 1.97.12.6-.09 1.9-.78 2.17-1.55Z" />
-            </svg>
-            <span
-                class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-white border-2 border-[#25D366] animate-pulse"></span>
-        </div>
-        <div class="flex flex-col leading-tight">
-            <span class="text-[10px] opacity-80 font-medium uppercase tracking-wider">Tanya Kami</span>
-            <span class="text-sm font-bold">Chat WhatsApp</span>
-        </div>
-    </a>
+
 
     <script>
         (() => {
