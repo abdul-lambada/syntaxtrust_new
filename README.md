@@ -9,6 +9,7 @@ SyntaxTrust adalah landing page interaktif yang dibangun dengan Laravel 12, Tail
 - Hero section bertema siang/malam dengan partikel animasi dan typewriter.
 - Carousel teknologi multi-baris dengan autoplay dan kontrol manual.
 - Carousel testimoni dengan thumbnail klik dan efek parallax.
+- Pagination Portofolio dengan tampilan 3 proyek per halaman (menggunakan Laravel Pagination & Custom Styling).
 - Form jadwal pertemuan dengan validasi inline, progress bar, dan preview pesan.
 - Footer modern dengan form newsletter dan ikon sosial bertooltip.
 
