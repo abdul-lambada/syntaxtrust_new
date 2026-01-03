@@ -622,24 +622,55 @@
                 this.startConversation();
             }
         },
+        isOfficeHours() {
+            const now = new Date();
+            const hour = now.getHours();
+            return hour >= 8 && hour < 21; // 08:00 - 21:00
+        },
         async startConversation() {
             this.typing = true;
             await new Promise(r => setTimeout(r, 1500));
             this.typing = false;
+    
+            const isOnline = this.isOfficeHours();
+            const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    
             this.messages.push({
                 type: 'bot',
                 text: 'Halo! 👋 Selamat datang di SyntaxTrust.',
-                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+                time: timeStr
             });
-            await new Promise(r => setTimeout(r, 800));
-            this.typing = true;
-            await new Promise(r => setTimeout(r, 1500));
-            this.typing = false;
-            this.messages.push({
-                type: 'bot',
-                text: 'Ada yang bisa saya bantu hari ini? Silakan pilih topik di bawah ini:',
-                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-            });
+    
+            if (!isOnline) {
+                await new Promise(r => setTimeout(r, 800));
+                this.typing = true;
+                await new Promise(r => setTimeout(r, 2000));
+                this.typing = false;
+                this.messages.push({
+                    type: 'bot',
+                    text: 'Mohon maaf, saat ini kami sedang berada di luar jam operasional (Istirahat).',
+                    time: timeStr
+                });
+                await new Promise(r => setTimeout(r, 800));
+                this.typing = true;
+                await new Promise(r => setTimeout(r, 1500));
+                this.typing = false;
+                this.messages.push({
+                    type: 'bot',
+                    text: 'Pesan Anda akan kami balas segera saat tim kembali beraktivitas besok jam 08:00 WIB. Terima kasih atas pengertiannya! 🙏',
+                    time: timeStr
+                });
+            } else {
+                await new Promise(r => setTimeout(r, 800));
+                this.typing = true;
+                await new Promise(r => setTimeout(r, 1500));
+                this.typing = false;
+                this.messages.push({
+                    type: 'bot',
+                    text: 'Ada yang bisa saya bantu hari ini? Silakan pilih topik di bawah ini:',
+                    time: timeStr
+                });
+            }
             this.showChat = true;
         },
         send(opt) {
