@@ -241,28 +241,64 @@ window.testimonialCarousel = function (initial = []) {
 // Tech Carousel
 window.techCarousel = function () {
     return {
+        index: 0,
+        slidesCount: 0,
         interval: null,
         init() {
-            this.startAutoScroll();
+            this.$nextTick(() => {
+                this.updateCount();
+                this.startAutoScroll();
+            });
+            window.addEventListener('resize', () => this.updateCount());
         },
-        scroll(direction) {
+        updateCount() {
+            const track = this.$refs.inner;
+            if (track) {
+                this.slidesCount = track.children.length;
+            }
+        },
+        onScroll() {
+            const track = this.$refs.inner;
+            if (!track || track.clientWidth === 0) return;
+            this.index = Math.round(track.scrollLeft / track.clientWidth);
+        },
+        go(idx) {
             const track = this.$refs.inner;
             if (!track) return;
-            const scrollAmount = 300;
-            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            track.scrollTo({
+                left: idx * track.clientWidth,
+                behavior: 'smooth'
+            });
+            this.index = idx;
         },
-        pause() { clearInterval(this.interval); },
+        pages() {
+            return Array.from({ length: this.slidesCount }, (_, i) => i);
+        },
+        scroll(direction) {
+            if (this.slidesCount <= 1) return;
+            let next = this.index + direction;
+            if (next >= this.slidesCount) next = 0;
+            if (next < 0) next = this.slidesCount - 1;
+            this.go(next);
+        },
+        pause() {
+            if (this.interval) {
+                clearInterval(this.interval);
+                this.interval = null;
+            }
+        },
+        resume() {
+            this.startAutoScroll();
+        },
         startAutoScroll() {
             this.pause();
-            this.interval = setInterval(() => {
-                const track = this.$refs.inner;
-                if (!track) return;
-                if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 50) {
-                    track.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
+            // Don't auto-scroll if only one slide
+            setTimeout(() => {
+                if (this.slidesCount <= 1) return;
+                this.interval = setInterval(() => {
                     this.scroll(1);
-                }
-            }, 5000);
+                }, 5000);
+            }, 100);
         }
     }
 }
