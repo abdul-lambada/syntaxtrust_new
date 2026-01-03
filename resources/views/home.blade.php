@@ -914,8 +914,8 @@
                             <div
                                 class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                                 <a href="{{ route('project.show', $prj->slug) }}"
-                                    class="bg-white text-neutral-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-neutral-100 transition-colors shadow-lg">
-                                    Detail
+                                    class="bg-white text-neutral-900 px-5 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-neutral-100 transition-all shadow-xl hover:scale-105 active:scale-95">
+                                    📜 Case Study
                                 </a>
                                 @if ($prj->link)
                                     <a href="{{ $prj->link }}" target="_blank"

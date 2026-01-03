@@ -66,11 +66,43 @@
                                 @enderror
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Deskripsi</label>
-                                <textarea name="description" rows="4" class="form-control" placeholder="Jelaskan detail project...">{{ old('description', $project->description) }}</textarea>
+                                <label class="form-label">Deskripsi Singkat</label>
+                                <textarea name="description" rows="2" class="form-control" placeholder="Jelaskan ringkasan project...">{{ old('description', $project->description) }}</textarea>
                                 @error('description')
                                     <div class="text-danger small">{{ $message }}</div>
                                 @enderror
+                            </div>
+
+                            <div class="col-12">
+                                <div class="p-3 border rounded bg-neutral-50">
+                                    <h5 class="mb-3">🔥 Detail Case Study</h5>
+
+                                    <div class="mb-3">
+                                        <label class="form-label font-bold text-dark">Challenge (Masalah Klien)</label>
+                                        <textarea name="challenge" rows="4" class="form-control" placeholder="Apa kesulitan yang dihadapi klien?">{{ old('challenge', $project->challenge) }}</textarea>
+                                        @error('challenge')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label font-bold text-dark">Solution (Solusi & Teknologi)</label>
+                                        <textarea name="solution" rows="4" class="form-control"
+                                            placeholder="Bagaimana Anda menyelesaikannya dan teknologi apa yang dipakai?">{{ old('solution', $project->solution) }}</textarea>
+                                        @error('solution')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-0">
+                                        <label class="form-label font-bold text-dark">Result (Hasil Akhir)</label>
+                                        <textarea name="result" rows="4" class="form-control"
+                                            placeholder="Apa hasil yang dicapai? (Misal: Kecepatan meningkat 50%, dsb)">{{ old('result', $project->result) }}</textarea>
+                                        @error('result')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-label">Project Link (URL)</label>
