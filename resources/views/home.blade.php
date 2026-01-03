@@ -477,7 +477,7 @@
             </template>
         </div>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 z-10">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <!-- Text Content -->
                 <div data-reveal class="space-y-8">
@@ -491,7 +491,7 @@
                         Satu-satunya Solusi Web Terpercaya
                     </div>
 
-                    <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
                         Wujudkan Website <br>
                         <span class="bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Impian
                             Anda</span>
@@ -607,7 +607,7 @@
     </section>
 
     <!-- Angka Bicara (Statistics Counter) -->
-    <section class="py-24 relative overflow-hidden bg-white">
+    <section class="py-16 lg:py-24 relative overflow-hidden bg-white">
         <!-- Background Elements -->
         <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[24px_24px] opacity-30">
         </div>
@@ -617,7 +617,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
                 <!-- Proyek Selesai -->
-                <div class="group relative p-10 rounded-4xl bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-100 hover:-translate-y-2 box-border"
+                <div class="group relative p-8 lg:p-10 rounded-[2.5rem] bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-100 hover:-translate-y-2 box-border"
                     x-data="{
                         current: 0,
                         target: {{ $projectsCount }},
@@ -651,7 +651,7 @@
                 </div>
 
                 <!-- Klien Puas -->
-                <div class="group relative p-10 rounded-4xl bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-100 hover:-translate-y-2"
+                <div class="group relative p-8 lg:p-10 rounded-[2.5rem] bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-100 hover:-translate-y-2"
                     x-data="{
                         current: 0,
                         target: {{ $happyClients }},
@@ -685,7 +685,7 @@
                 </div>
 
                 <!-- Tahun Pengalaman -->
-                <div class="group relative p-10 rounded-4xl bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-amber-100 hover:-translate-y-2"
+                <div class="group relative p-8 lg:p-10 rounded-[2.5rem] bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-amber-100 hover:-translate-y-2"
                     x-data="{
                         current: 0,
                         target: {{ $yearsExperience }},
@@ -713,7 +713,7 @@
                 </div>
 
                 <!-- Kota Client -->
-                <div class="group relative p-10 rounded-4xl bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-100 hover:-translate-y-2"
+                <div class="group relative p-8 lg:p-10 rounded-[2.5rem] bg-white border border-neutral-100 text-center transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-100 hover:-translate-y-2"
                     x-data="{
                         current: 0,
                         target: {{ $servedCities }},
@@ -746,7 +746,7 @@
     <!-- Teknologi yang Digunakan -->
     <section class="bg-white" x-data="techCarousel()" x-init="init()" @mouseenter="pause()"
         @mouseleave="resume()">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
             <h2 class="text-2xl font-bold text-center" data-reveal>Teknologi yang Digunakan</h2>
             <p class="mt-2 text-neutral-600 text-center" data-reveal>Stack modern untuk hasil yang optimal.</p>
             <div class="relative mt-8">
@@ -833,7 +833,7 @@
     </section>
 
     <!-- Layanan -->
-    <section id="layanan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section id="layanan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <h2 class="text-2xl font-bold">Layanan</h2>
         <p class="mt-2 text-neutral-600">Pilih layanan sesuai kebutuhan proyek Anda.</p>
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -873,7 +873,7 @@
 
     <!-- Portofolio -->
     <section id="portofolio" class="bg-white overflow-hidden" x-data="{ filter: 'all' }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6" data-reveal>
                 <div>
                     <h2 class="text-2xl font-bold">Portofolio Kami</h2>
@@ -967,7 +967,7 @@
     </section>
 
     <!-- Kenapa Memilih SyntaxTrust -->
-    <section class="py-24 relative overflow-hidden bg-white">
+    <section class="py-16 lg:py-24 relative overflow-hidden bg-white">
         <!-- Background Decor -->
         <div class="absolute -top-24 -left-24 h-96 w-96 bg-indigo-600/5 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 -right-24 h-96 w-96 bg-violet-600/5 rounded-full blur-3xl"></div>
@@ -1059,7 +1059,7 @@
 
 
     <!-- Paket Layanan (Pricing) -->
-    <section id="pricing" class="py-24 bg-neutral-50/50 relative overflow-hidden">
+    <section id="pricing" class="py-16 lg:py-24 bg-neutral-50/50 relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.02]">
         </div>
 
@@ -1075,7 +1075,7 @@
 
             <div class="grid md:grid-cols-3 gap-8 items-stretch pt-4">
                 @foreach ($packages as $pkg)
-                    <div class="relative group rounded-[3rem] border-2 {{ $pkg->is_highlighted ? 'border-indigo-600 bg-white shadow-2xl md:scale-105 z-10' : 'border-white bg-white/60 backdrop-blur-md shadow-xl' }} p-10 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
+                    <div class="relative group rounded-[2.5rem] border-2 {{ $pkg->is_highlighted ? 'border-indigo-600 bg-white shadow-2xl md:scale-105 z-10' : 'border-white bg-white/60 backdrop-blur-md shadow-xl' }} p-8 lg:p-10 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col"
                         data-reveal>
                         @if ($pkg->badge)
                             <div
@@ -1123,10 +1123,10 @@
     </section>
 
     <!-- Alur Kerja -->
-    <section class="py-24 bg-neutral-50 overflow-hidden">
+    <section class="py-16 lg:py-24 bg-neutral-50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Alur Kerja -->
-            <section id="proses" class="py-24 bg-white relative overflow-hidden">
+            <section id="proses" class="py-16 lg:py-24 bg-white relative overflow-hidden rounded-[3rem]">
                 <div
                     class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 h-96 w-96 bg-indigo-50 rounded-full blur-3xl opacity-50">
                 </div>
@@ -1141,7 +1141,7 @@
 
                     <div class="grid gap-8 md:grid-cols-4 mb-20">
                         @foreach ($process ?? [] as $idx => $ps)
-                            <div class="group relative p-10 rounded-[3rem] bg-neutral-50 border border-transparent transition-all duration-500 hover:bg-white hover:border-indigo-100 hover:shadow-2xl"
+                            <div class="group relative p-8 lg:p-10 rounded-[2.5rem] bg-neutral-50 border border-transparent transition-all duration-500 hover:bg-white hover:border-indigo-100 hover:shadow-2xl"
                                 data-reveal>
                                 <div
                                     class="text-[5rem] font-black text-white group-hover:text-indigo-600/5 transition-colors duration-500 absolute top-4 right-8 select-none">
@@ -1170,7 +1170,7 @@
                     </div>
 
                     <!-- Interactive Timeline -->
-                    <div class="relative bg-white rounded-[3rem] p-10 lg:p-16 shadow-2xl overflow-hidden"
+                    <div class="relative bg-white rounded-[2.5rem] p-8 lg:p-16 shadow-2xl overflow-hidden"
                         x-data="{
                             step: 1,
                             steps: [
@@ -1240,7 +1240,7 @@
             </section>
 
             <!-- Testimoni -->
-            <section class="py-24 bg-white overflow-hidden" x-data="testimonialCarousel(@js($testimonialItems ?? []))" x-init="init()">
+            <section class="py-16 lg:py-24 bg-white overflow-hidden" x-data="testimonialCarousel(@js($testimonialItems ?? []))" x-init="init()">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16" data-reveal>
                         <h2 class="text-4xl font-extrabold text-neutral-900 tracking-tight">Apa Kata Klien Kami</h2>
@@ -1251,7 +1251,7 @@
 
                     <div class="relative" x-show="items.length">
                         <!-- Main Carousel -->
-                        <div class="relative bg-neutral-900 rounded-[3rem] p-10 lg:p-20 text-white overflow-hidden shadow-2xl shadow-indigo-200/50"
+                        <div class="relative bg-neutral-900 rounded-[2.5rem] p-10 lg:p-20 text-white overflow-hidden shadow-2xl shadow-indigo-200/50"
                             data-reveal>
                             <!-- Quote Decoration -->
                             <div class="absolute top-10 left-10 text-indigo-500 opacity-20">
@@ -1470,7 +1470,7 @@
                     $watch('link', () => save());
                     $watch('remember', () => save());">
                     <!-- Jadwalkan Pertemuan -->
-                    <section id="jadwal" class="py-24 bg-neutral-50 relative overflow-hidden">
+                    <section id="jadwal" class="py-16 lg:py-24 bg-neutral-50 relative overflow-hidden">
                         <div
                             class="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.03]">
                         </div>

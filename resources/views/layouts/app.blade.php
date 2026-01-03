@@ -94,7 +94,22 @@
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
-<body class="font-sans antialiased bg-neutral-50 text-neutral-900">
+<body class="font-sans antialiased bg-neutral-50 text-neutral-900 overflow-x-hidden" x-data="{
+    mobileMenuOpen: false,
+    sc: false,
+    progress: 0,
+    update() {
+        const doc = document.documentElement;
+        const h = doc.scrollHeight - window.innerHeight;
+        this.progress = h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0;
+        this.sc = window.scrollY > 10;
+    },
+    init() {
+        this.update();
+        window.addEventListener('resize', () => this.update());
+    }
+}"
+    x-init="init()" @scroll.window="update()">
     <!-- Urgency Banner Lead Magnet -->
     <div x-data="{
         timeLeft: '',
@@ -115,7 +130,7 @@
             // Simulate slot decrement occasionally for psychological effect
             setTimeout(() => { if (this.slots > 1) this.slots-- }, 15000);
         }
-    }"
+    }" x-init="init()"
         class="bg-linear-to-r from-indigo-700 via-indigo-600 to-violet-700 text-white py-2 px-4 shadow-lg overflow-hidden relative group">
         <div
             class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center sm:text-left relative z-10">
@@ -149,20 +164,7 @@
         </div>
     </div>
 
-    <header x-data="{
-        open: false,
-        sc: false,
-        progress: 0,
-        update() {
-            const doc = document.documentElement;
-            const h = doc.scrollHeight - window.innerHeight;
-            this.progress = h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0;
-            this.sc = window.scrollY > 10;
-        },
-        init() {
-            this.update();
-            window.addEventListener('resize', () => this.update());
-        }" x-init="init()" @scroll.window="update()" :class="sc ? 'shadow-sm' : ''"
+    <header :class="sc ? 'shadow-sm' : ''"
         class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-neutral-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -184,45 +186,87 @@
                             class="nav-underline absolute left-0 -bottom-1 h-0.5 w-0 bg-indigo-600 transition-all group-hover:w-full"></span></a>
                     <a data-nav href="#layanan" class="group relative">Layanan<span
                             class="nav-underline absolute left-0 -bottom-1 h-0.5 w-0 bg-indigo-600 transition-all group-hover:w-full"></span></a>
+                    <a data-nav href="#portofolio" class="group relative">Portofolio<span
+                            class="nav-underline absolute left-0 -bottom-1 h-0.5 w-0 bg-indigo-600 transition-all group-hover:w-full"></span></a>
+                    <a data-nav href="#pricing" class="group relative">Harga<span
+                            class="nav-underline absolute left-0 -bottom-1 h-0.5 w-0 bg-indigo-600 transition-all group-hover:w-full"></span></a>
                     <a data-nav href="#jadwal" class="group relative">Jadwal<span
                             class="nav-underline absolute left-0 -bottom-1 h-0.5 w-0 bg-indigo-600 transition-all group-hover:w-full"></span></a>
                     <a data-nav href="#kontak"
                         class="ml-2 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500">Mulai Proyek</a>
                 </nav>
-                <button @click="open=!open"
-                    class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-neutral-300">
-                    <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" class="h-5 w-5">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="md:hidden inline-flex items-center justify-center h-10 w-10 text-neutral-900 rounded-lg border border-neutral-300 hover:bg-neutral-100 transition z-50 relative">
+                    <svg x-show="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" class="h-6 w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" class="h-5 w-5">
+                    <svg x-show="mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" class="h-6 w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <div x-show="open" x-transition.opacity class="md:hidden fixed inset-0 z-40">
-                <div @click="open=false" class="absolute inset-0 bg-black/30"></div>
-                <div class="absolute right-0 top-0 h-full w-72 bg-white shadow-xl p-6 flex flex-col gap-3">
-                    <a data-nav @click="open=false" href="/" class="py-2">Beranda</a>
-                    <a data-nav @click="open=false" href="#layanan" class="py-2">Layanan</a>
-                    <a data-nav @click="open=false" href="#jadwal" class="py-2">Jadwal</a>
-                    <a data-nav @click="open=false" href="#kontak"
-                        class="mt-2 py-2 px-3 rounded-lg bg-indigo-600 text-white text-center">Mulai Proyek</a>
-                </div>
-            </div>
+
         </div>
         <div class="absolute left-0 bottom-0 h-0.5 bg-linear-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 transition-all duration-200"
             :style="`width:${progress}%; opacity:${progress>1?1:0}`"></div>
     </header>
 
+    <!-- Mobile Menu Overlay -->
+    <div x-show="mobileMenuOpen" style="display: none;" x-transition.opacity class="fixed inset-0 z-100 md:hidden">
+        <!-- Backdrop -->
+        <div @click="mobileMenuOpen = false" class="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm"></div>
+
+        <!-- Drawer -->
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            class="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl p-6 flex flex-col gap-6 overflow-y-auto">
+
+            <!-- Header of Drawer -->
+            <div class="flex items-center justify-between">
+                <span class="text-lg font-bold text-neutral-900">Menu</span>
+                <button @click="mobileMenuOpen = false" class="p-2 -mr-2 text-neutral-500 hover:text-neutral-900">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Links -->
+            <nav class="flex flex-col gap-4">
+                <a data-nav @click="mobileMenuOpen=false" href="/"
+                    class="text-lg font-medium text-neutral-600 hover:text-indigo-600">Beranda</a>
+                <a data-nav @click="mobileMenuOpen=false" href="#layanan"
+                    class="text-lg font-medium text-neutral-600 hover:text-indigo-600">Layanan</a>
+                <a data-nav @click="mobileMenuOpen=false" href="#portofolio"
+                    class="text-lg font-medium text-neutral-600 hover:text-indigo-600">Portofolio</a>
+                <a data-nav @click="mobileMenuOpen=false" href="#pricing"
+                    class="text-lg font-medium text-neutral-600 hover:text-indigo-600">Harga</a>
+                <a data-nav @click="mobileMenuOpen=false" href="#jadwal"
+                    class="text-lg font-medium text-neutral-600 hover:text-indigo-600">Jadwal</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="mt-auto">
+                <a @click="mobileMenuOpen=false" href="#kontak"
+                    class="block w-full py-4 rounded-xl bg-indigo-600 text-white text-center font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition">
+                    Mulai Proyek
+                </a>
+            </div>
+        </div>
+    </div>
+
     <main>
         @yield('content')
     </main>
 
-    <footer class="bg-neutral-900 text-white pt-24 pb-12 overflow-hidden relative">
+    <footer class="bg-neutral-900 text-white pt-16 lg:pt-24 pb-12 overflow-hidden relative">
         <!-- Decorative Background -->
         <div class="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent">
         </div>
@@ -592,6 +636,14 @@
                     id: '#kontak',
                     el: document.querySelector('#kontak')
                 },
+                {
+                    id: '#portofolio',
+                    el: document.querySelector('#portofolio')
+                },
+                {
+                    id: '#pricing',
+                    el: document.querySelector('#pricing')
+                },
             ].filter(s => s.el);
             const navs = document.querySelectorAll('a[data-nav]');
             const setActive = (hash) => {
@@ -600,8 +652,17 @@
                         'href') === '/');
                     const u = a.querySelector('.nav-underline');
                     if (u) u.style.width = active ? '100%' : '0';
-                    a.classList.toggle('text-indigo-600', active);
-                    a.classList.toggle('font-semibold', active);
+
+                    // Desktop & Common
+                    if (active) {
+                        a.classList.add('text-indigo-600', 'font-semibold');
+                        a.classList.remove('text-neutral-600'); // Remove default mobile color
+                    } else {
+                        a.classList.remove('text-indigo-600', 'font-semibold');
+                        if (a.closest('.fixed')) { // Check if inside mobile menu
+                            a.classList.add('text-neutral-600');
+                        }
+                    }
                 });
             };
             const so = new IntersectionObserver((entries) => {
