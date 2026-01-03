@@ -272,9 +272,9 @@ window.techCarousel = function () {
         },
         go(idx) {
             const track = this.$refs.inner;
-            if (!track) return;
+            if (!track || !track.children[idx]) return;
             track.scrollTo({
-                left: idx * track.clientWidth,
+                left: track.children[idx].offsetLeft,
                 behavior: 'smooth'
             });
             this.index = idx;
@@ -300,13 +300,13 @@ window.techCarousel = function () {
         },
         startAutoScroll() {
             this.pause();
-            // Don't auto-scroll if only one slide
             setTimeout(() => {
+                this.updateCount();
                 if (this.slidesCount <= 1) return;
                 this.interval = setInterval(() => {
                     this.scroll(1);
                 }, 5000);
-            }, 100);
+            }, 500);
         }
     }
 }

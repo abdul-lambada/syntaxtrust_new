@@ -843,7 +843,7 @@
                             $techGroups = collect($technologies ?? [])->chunk(6); // 6 per slide (2 rows x 3 columns)
                         @endphp
                         @forelse($techGroups as $group)
-                            <div class="tech-slide snap-start min-w-full sm:min-w-[540px] lg:min-w-[680px]" data-reveal>
+                            <div class="tech-slide snap-start min-w-full" data-reveal>
                                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                                     @foreach ($group as $tech)
                                         @php
