@@ -949,28 +949,6 @@
             const initHash = location.hash && document.querySelector(location.hash) ? location.hash : '/';
             setActive(initHash);
         })();
-
-        // Sync 'theme-night' class with Tailwind 'dark' class
-        (() => {
-            const syncDark = () => {
-                if (document.body.classList.contains('theme-night') || document.documentElement.classList.contains(
-                        'theme-night')) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            };
-            const obs = new MutationObserver(syncDark);
-            obs.observe(document.body, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-            obs.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-            syncDark(); // Initial check
-        })();
     </script>
 </body>
 
