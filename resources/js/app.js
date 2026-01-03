@@ -226,6 +226,14 @@ window.testimonialCarousel = function (initial = []) {
             this.index = (this.index + 1) % this.items.length;
             this.resetCycle();
         },
+        prev() {
+            this.index = (this.index - 1 + this.items.length) % this.items.length;
+            this.resetCycle();
+        },
+        go(idx) {
+            this.index = idx;
+            this.resetCycle();
+        },
         resetCycle() {
             this.stop();
             this.progress = 0;
