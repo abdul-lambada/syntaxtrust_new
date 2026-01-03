@@ -582,7 +582,277 @@
         </svg>
     </button>
 
+    <!-- Advanced WhatsApp Widget -->
+    <div x-data="{
+        open: false,
+        ping: true,
+        typing: false,
+        messages: [],
+        showChat: false,
+        showTeaser: false,
+        sound: new Audio('https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3'),
+        waNumber: '{{ preg_replace('/\D/', '', $__setting->whatsapp ?? '6285156553226') }}',
+        options: [
+            { id: 1, text: '🚀  Ingin buat website baru', msg: 'Halo, saya tertarik membuat website baru. Bisa diskusi?' },
+            { id: 2, text: '🔧  Butuh perbaikan / maintenance', msg: 'Halo, saya butuh bantuan perbaikan website.' },
+            { id: 3, text: '💰  Tanya harga & paket', msg: 'Halo, boleh minta info harga dan paket layanannya?' },
+            { id: 4, text: '🎓  Bantuan Skripsi / TA', msg: 'Halo, saya butuh bantuan untuk website skripsi/TA.' },
+        ],
+        init() {
+            // Sequence: Ping -> Teaser -> Auto Open
+            setTimeout(() => { if (!this.open) this.notification(); }, 3000); // 3s: Sound/Ping
+            setTimeout(() => { if (!this.open) this.showTeaser = true; }, 6000); // 6s: Show Teaser
+            setTimeout(() => {
+                if (!this.open && !localStorage.getItem('chat_auto_opened')) {
+                    this.toggle();
+                    localStorage.setItem('chat_auto_opened', 'true'); // Only auto-open once per session
+                }
+            }, 12000); // 12s: Auto Open
+        },
+        notification() {
+            this.ping = true;
+            this.sound.volume = 0.5;
+            this.sound.play().catch(e => {});
+        },
+        toggle() {
+            this.open = !this.open;
+            this.ping = false;
+            this.showTeaser = false;
+            if (this.open && this.messages.length === 0) {
+                this.startConversation();
+            }
+        },
+        async startConversation() {
+            this.typing = true;
+            await new Promise(r => setTimeout(r, 1500));
+            this.typing = false;
+            this.messages.push({
+                type: 'bot',
+                text: 'Halo! 👋 Selamat datang di SyntaxTrust.',
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            });
+            await new Promise(r => setTimeout(r, 800));
+            this.typing = true;
+            await new Promise(r => setTimeout(r, 1500));
+            this.typing = false;
+            this.messages.push({
+                type: 'bot',
+                text: 'Ada yang bisa saya bantu hari ini? Silakan pilih topik di bawah ini:',
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            });
+            this.showChat = true;
+        },
+        send(opt) {
+            this.messages.push({
+                type: 'user',
+                text: opt.text,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            });
+            setTimeout(() => {
+                const url = `https://wa.me/${this.waNumber}?text=${encodeURIComponent(opt.msg)}`;
+                window.open(url, '_blank');
+            }, 800);
+        }
+    }" class="fixed bottom-24 right-6 z-[9999] font-sans flex flex-col items-end gap-4"
+        style="display: none;" x-show="true">
 
+        <!-- Attention Teaser Bubble -->
+        <div x-show="showTeaser && !open" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-x-10 scale-90"
+            x-transition:enter-end="opacity-100 translate-x-0 scale-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-x-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-x-10 scale-90" @click="toggle()"
+            class="mr-2 bg-white px-4 py-3 rounded-2xl rounded-tr-sm shadow-xl border border-indigo-100 cursor-pointer hover:bg-neutral-50 flex items-center gap-3 relative max-w-[250px] group">
+            <span
+                class="absolute -right-1.5 top-3 w-3 h-3 bg-white rotate-45 border-r border-t border-indigo-100"></span>
+            <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-lg shrink-0">
+                👋
+            </div>
+            <div>
+                <p class="text-xs font-bold text-neutral-900">Butuh bantuan?</p>
+                <p class="text-[10px] text-neutral-500">Chat kami sekarang!</p>
+            </div>
+            <button @click.stop="showTeaser = false"
+                class="absolute -top-2 -left-2 bg-white text-neutral-400 hover:text-red-500 rounded-full h-5 w-5 border border-neutral-200 shadow-sm flex items-center justify-center transition-colors">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Chat Window -->
+        <div x-show="open" x-transition:enter="transition ease-[cubic-bezier(0.34,1.56,0.64,1)] duration-500"
+            x-transition:enter-start="opacity-0 translate-y-10 scale-90"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-10 scale-90"
+            class="w-[90vw] max-w-[360px] md:w-[380px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-white/20 ring-1 ring-black/5 flex flex-col max-h-[calc(100vh-180px)] h-[500px] md:h-auto origin-bottom-right">
+
+            <!-- Header with Glassmorphism -->
+            <div class="h-24 bg-linear-to-br from-indigo-600 to-violet-700 relative flex items-center p-6 shrink-0">
+                <div
+                    class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150">
+                </div>
+                <div class="relative z-10 flex items-center gap-4 w-full">
+                    <div class="relative">
+                        <div
+                            class="h-12 w-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
+                            <span class="text-2xl">🤖</span>
+                        </div>
+                        <span
+                            class="absolute bottom-0 right-0 h-3.5 w-3.5 bg-emerald-400 border-[3px] border-indigo-700 rounded-full"></span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white tracking-wide text-lg">Support Agent</h3>
+                        <p class="text-indigo-100/90 text-xs font-medium flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Online sekarang
+                        </p>
+                    </div>
+                    <button @click="open = false"
+                        class="h-8 w-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div
+                class="flex-1 bg-[#F0F2F5] p-5 overflow-y-auto custom-scrollbar scroll-smooth flex flex-col gap-4 relative">
+                <!-- Background Pattern -->
+                <div
+                    class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none">
+                </div>
+
+                <!-- Date Separator -->
+                <div class="text-center my-2">
+                    <span
+                        class="bg-neutral-200/60 text-neutral-500 text-[10px] uppercase font-bold px-3 py-1 rounded-full tracking-widest backdrop-blur-sm">
+                        {{ now()->translatedFormat('l, d M') }}
+                    </span>
+                </div>
+
+                <!-- Messages -->
+                <template x-for="(msg, idx) in messages" :key="idx">
+                    <div class="flex flex-col gap-1 w-full"
+                        :class="msg.type === 'user' ? 'items-end' : 'items-start'">
+                        <div class="max-w-[85%] p-3.5 text-sm leading-relaxed shadow-sm relative group transition-all duration-300 transform translate-y-0"
+                            :class="msg.type === 'user' ?
+                                'bg-indigo-600 text-white rounded-2xl rounded-tr-sm' :
+                                'bg-white text-neutral-900 rounded-2xl rounded-tl-sm border border-neutral-100'">
+                            <p x-text="msg.text"></p>
+                            <span class="text-[9px] absolute bottom-1 right-2.5 opacity-60 font-medium"
+                                :class="msg.type === 'user' ? 'text-indigo-100' : 'text-neutral-400'"
+                                x-text="msg.time"></span>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Typing Component -->
+                <div x-show="typing" class="flex items-center gap-2"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0">
+                    <div
+                        class="h-8 w-8 rounded-full bg-white border border-neutral-100 flex items-center justify-center shrink-0 shadow-sm">
+                        <span class="text-xs">🤖</span>
+                    </div>
+                    <div
+                        class="bg-white px-4 py-3 rounded-2xl rounded-tl-sm shadow-sm border border-neutral-100 flex gap-1 items-center h-10">
+                        <span class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"></span>
+                        <span class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce delay-75"></span>
+                        <span class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce delay-150"></span>
+                    </div>
+                </div>
+
+                <!-- Options grid -->
+                <div x-show="showChat" class="grid gap-2 mt-2"
+                    x-transition:enter="transition ease-out duration-500 delay-300"
+                    x-transition:enter-start="opacity-0 translate-y-4"
+                    x-transition:enter-end="opacity-100 translate-y-0">
+                    <template x-for="opt in options" :key="opt.id">
+                        <button @click="send(opt)"
+                            class="text-left bg-white hover:bg-indigo-50 border border-neutral-100 hover:border-indigo-200 p-3.5 rounded-xl transition-all duration-200 group flex items-center justify-between shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                            <span class="text-sm font-semibold text-neutral-700 group-hover:text-indigo-700"
+                                x-text="opt.text"></span>
+                            <div
+                                class="h-6 w-6 rounded-full bg-neutral-50 group-hover:bg-indigo-100 flex items-center justify-center text-neutral-400 group-hover:text-indigo-600 transition-colors">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Bottom Spacer -->
+                <div class="h-2"></div>
+            </div>
+
+            <!-- Footer Input Area (Disabled Visual) -->
+            <div class="p-3 bg-white border-t border-neutral-100 shrink-0">
+                <button @click="window.open(`https://wa.me/${waNumber}`, '_blank')"
+                    class="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba53] text-white py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-emerald-200 active:scale-[0.98]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    <span>Chat Langsung di WhatsApp</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Toggle Button -->
+        <button @click="toggle()"
+            class="group relative h-16 w-16 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_40px_rgba(37,211,102,0.6)] hover:-translate-y-1 hover:scale-105 transition-all duration-300 z-50 overflow-hidden">
+
+            <!-- Ripple Effect -->
+            <div class="absolute inset-0 rounded-full border border-white/40 animate-ping opacity-75" x-show="ping">
+            </div>
+            <div class="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse delay-75" x-show="ping">
+            </div>
+
+            <!-- Notification Badge -->
+            <div x-show="ping" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-0" x-transition:enter-end="opacity-100 scale-100"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold z-10 shadow-sm">
+                1
+            </div>
+
+            <!-- Icons with rotation animation -->
+            <div class="relative w-full h-full flex items-center justify-center">
+                <svg x-show="!open" x-transition:enter="transition ease-out duration-300 absolute"
+                    x-transition:enter-start="opacity-0 rotate-180 scale-50"
+                    x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                    x-transition:leave="transition ease-in duration-200 absolute"
+                    x-transition:leave-start="opacity-100 rotate-0 scale-100"
+                    x-transition:leave-end="opacity-0 -rotate-180 scale-50" class="h-8 w-8 drop-shadow-md"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
+
+                <svg x-show="open" x-transition:enter="transition ease-out duration-300 absolute"
+                    x-transition:enter-start="opacity-0 -rotate-180 scale-50"
+                    x-transition:enter-end="opacity-100 rotate-0 scale-100"
+                    x-transition:leave="transition ease-in duration-200 absolute"
+                    x-transition:leave-start="opacity-100 rotate-0 scale-100"
+                    x-transition:leave-end="opacity-0 rotate-180 scale-50" class="h-8 w-8" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </button>
+    </div>
 
     <script>
         (() => {
