@@ -271,10 +271,9 @@ window.techCarousel = function () {
 window.typewriterCard = function () {
     return {
         items: [
-            { label: 'Tugas Kuliah', title: 'Bantuan Skripsi & IT', subtitle: 'Code rapi, siap demo.', emoji: '🎓', tagline: 'Student Friendly' },
-            { label: 'UMKM', title: 'Landing Page Premium', subtitle: 'Website jualan 24 jam.', emoji: '🚀', tagline: 'High Conversion' },
-            { label: 'System', title: 'Aplikasi Web Kompleks', subtitle: 'Sesuai alur bisnis Anda.', emoji: '⚙️', tagline: 'Enterprise' },
-            { label: 'Fix', title: 'Maintenance & Update', subtitle: 'Perbaikan error cepat.', emoji: '🔧', tagline: 'Support' }
+            { label: 'Modifikasi & Fix Bug', title: 'Perbaikan atau penambahan fitur website yang sudah ada', subtitle: 'Website jualan 24 jam.', emoji: '🔄️', tagline: 'High Conversion' },
+            { label: 'Tugas Kuliah', title: 'Bantu selesaikan project web tugas kuliah & skripsi', subtitle: 'Code rapi, siap demo.', emoji: '👨‍🏫', tagline: 'Student Friendly' },
+            { label: 'Membuat Website dari Nol', title: 'Pembuatan sistem yang disesuaikan dengan butuhan', subtitle: 'Sesuai kebutuhan Anda.', emoji: '💻', tagline: 'Enterprise' }
         ],
         index: 0,
         current: null,
