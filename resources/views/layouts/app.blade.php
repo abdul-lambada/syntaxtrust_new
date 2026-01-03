@@ -653,7 +653,7 @@
                 window.open(url, '_blank');
             }, 800);
         }
-    }" class="fixed bottom-24 right-6 z-[9999] font-sans flex flex-col items-end gap-4"
+    }" class="fixed bottom-24 right-6 z-9999 font-sans flex flex-col items-end gap-4"
         style="display: none;" x-show="true">
 
         <!-- Attention Teaser Bubble -->
@@ -688,7 +688,7 @@
             x-transition:leave="transition ease-in duration-300"
             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
             x-transition:leave-end="opacity-0 translate-y-10 scale-90"
-            class="w-[90vw] max-w-[360px] md:w-[380px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-white/20 ring-1 ring-black/5 flex flex-col max-h-[calc(100vh-180px)] h-[500px] md:h-auto origin-bottom-right">
+            class="w-[90vw] max-w-[360px] md:w-[380px] bg-white rounded-4xl shadow-2xl overflow-hidden border border-white/20 ring-1 ring-black/5 flex flex-col max-h-[calc(100vh-180px)] h-[500px] md:h-auto origin-bottom-right">
 
             <!-- Header with Glassmorphism -->
             <div class="h-24 bg-linear-to-br from-indigo-600 to-violet-700 relative flex items-center p-6 shrink-0">
