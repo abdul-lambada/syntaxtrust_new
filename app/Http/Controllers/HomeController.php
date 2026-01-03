@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index()
     {
         $services = Service::query()->where('is_active', true)->orderBy('order')->get();
-        $projects = Project::query()->where('is_active', true)->orderBy('order')->get();
+        $projects = Project::query()->where('is_active', true)->orderBy('order')->paginate(3);
         $packages = PricingPackage::query()->where('is_active', true)->orderBy('order')->get();
         $process = ProcessStep::query()->where('is_active', true)->orderBy('order')->get();
         $technologies = Technology::query()->where('is_active', true)->orderBy('order')->get();

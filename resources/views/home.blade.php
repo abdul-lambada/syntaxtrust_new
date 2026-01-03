@@ -462,6 +462,74 @@
         .nav-link:hover::after {
             width: 100%;
         }
+
+        /* Custom Pagination Styling */
+        .custom-pagination {
+            --pag-bg: #ffffff;
+            --pag-border: rgba(226, 232, 240, 0.8);
+            --pag-text: #4b5563;
+            --pag-active-bg: #4f46e5;
+            --pag-active-text: #ffffff;
+            --pag-hover-bg: #f3f4f6;
+        }
+
+        body.theme-night .custom-pagination {
+            --pag-bg: rgba(15, 23, 42, 0.9);
+            --pag-border: rgba(148, 163, 184, 0.2);
+            --pag-text: #94a3b8;
+            --pag-active-bg: #6366f1;
+            --pag-active-text: #ffffff;
+            --pag-hover-bg: rgba(30, 41, 59, 0.8);
+        }
+
+        .custom-pagination nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .custom-pagination a,
+        .custom-pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.5rem;
+            height: 2.5rem;
+            padding: 0 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--pag-border);
+            background: var(--pag-bg);
+            color: var(--pag-text);
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .custom-pagination a:hover {
+            background: var(--pag-hover-bg);
+            transform: translateY(-2px);
+            border-color: var(--pag-active-bg);
+            color: var(--pag-active-bg);
+        }
+
+        .custom-pagination span[aria-current="page"],
+        .custom-pagination .active {
+            background: var(--pag-active-bg) !important;
+            color: var(--pag-active-text) !important;
+            border-color: var(--pag-active-bg) !important;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+
+        .custom-pagination .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Hide "Showing X of Y" text in pagination if any */
+        .custom-pagination nav div p {
+            display: none;
+        }
     </style>
 
     <!-- Hero -->
@@ -961,6 +1029,13 @@
                     </div>
                 @endforelse
             </div>
+
+            @if ($projects->hasPages())
+                <!-- Pagination -->
+                <div class="mt-16 flex justify-center custom-pagination" data-reveal>
+                    {{ $projects->fragment('portofolio')->links() }}
+                </div>
+            @endif
         </div>
     </section>
 
