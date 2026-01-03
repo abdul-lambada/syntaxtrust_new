@@ -40,12 +40,13 @@ class HomeController extends Controller
                 'rating' => (int)($tm->rating ?? 5),
             ];
         })->values();
-        $happyClients = Testimonial::count() + 15; // Base + 15 for social proof
-        $projectsCount = Project::count() + 25; // Base + 25
+        $setting = \App\Models\SiteSetting::where('is_active', true)->latest('id')->first();
+        $happyClients = optional($setting)->stats_clients ?? (Testimonial::count() + 15);
+        $projectsCount = optional($setting)->stats_projects ?? (Project::count() + 25);
         $avgRating = Testimonial::avg('rating') ?: 5;
         $avgSatisfaction = (int) round(($avgRating/5) * 100);
-        $yearsExperience = max(4, date('Y') - 2021); // Since 2021
-        $servedCities = 12; // Static for now or we can count from somewhere
+        $yearsExperience = optional($setting)->stats_years ?? max(4, date('Y') - 2021);
+        $servedCities = optional($setting)->stats_cities ?? 12;
         $faqs = Faq::query()->where('is_active', true)->orderBy('order')->get();
         $contacts = ContactInfo::query()->where('is_active', true)->orderBy('order')->get();
 

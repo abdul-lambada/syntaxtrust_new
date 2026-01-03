@@ -67,6 +67,10 @@ class SiteSettingController extends Controller
             'is_active' => ['nullable','boolean'],
             'logo_file' => ['nullable','image','max:2048'],
             'remove_logo' => ['nullable','boolean'],
+            'stats_projects' => ['nullable','integer','min:0'],
+            'stats_clients' => ['nullable','integer','min:0'],
+            'stats_years' => ['nullable','integer','min:0'],
+            'stats_cities' => ['nullable','integer','min:0'],
         ]);
     }
 }

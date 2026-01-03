@@ -10,6 +10,7 @@ class SiteSetting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'site_name', 'logo_path', 'is_active'
+        'site_name', 'logo_path', 'is_active',
+        'stats_projects', 'stats_clients', 'stats_years', 'stats_cities'
     ];
 }

@@ -189,90 +189,64 @@
     <script>
         (function($) {
             'use strict';
-            if ($("#projectChart").length) {
-                var projectData = {
-                    datasets: [{
-                        data: {!! json_encode($project_categories->pluck('total')) !!},
-                        backgroundColor: [
-                            "#1F3BB3",
-                            "#F1533E",
-                            "#FECD01",
-                            "#484848",
-                            "#8D62AB",
-                            "#52CDFF"
-                        ],
-                        borderColor: [
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff",
-                            "#fff"
-                        ],
-                        borderWidth: 2
-                    }],
-                    labels: {!! json_encode($project_categories->pluck('category_name')) !!}
-                };
-                var projectOptions = {
-                    cutout: 70,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    },
-                    plugins: {
-                        legend: {
-                            display: false,
+            $(function() {
+                if ($("#projectChart").length) {
+                    var labels = {!! json_encode($project_categories->pluck('category_name')) !!};
+                    var data = {!! json_encode($project_categories->pluck('total')) !!};
+
+                    var projectData = {
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [
+                                "#1F3BB3", "#F1533E", "#FECD01", "#484848", "#8D62AB", "#52CDFF"
+                            ],
+                            borderColor: "#fff",
+                            borderWidth: 2
+                        }],
+                        labels: labels
+                    };
+
+                    var projectOptions = {
+                        cutout: '70%',
+                        responsive: false, // MATIKAN RESPONSIVE UNTUK STOP LOOP
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                        },
+                        animation: {
+                            animateScale: false, // Matikan animasi untuk stabilitas
+                            animateRotate: false
                         }
+                    };
+
+                    var projectCanvas = $("#projectChart").get(0).getContext("2d");
+                    var projectChart = new Chart(projectCanvas, {
+                        type: 'doughnut',
+                        data: projectData,
+                        options: projectOptions
+                    });
+
+                    // Generate legend sederhana tanpa manipulasi style berlebih
+                    var legendElem = document.getElementById('projectChart-legend');
+                    if (legendElem) {
+                        var html =
+                            '<ul style="list-style:none; padding:0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:15px;">';
+                        projectChart.data.labels.forEach(function(label, i) {
+                            var color = projectChart.data.datasets[0].backgroundColor[i % projectChart
+                                .data.datasets[0].backgroundColor.length];
+                            html +=
+                                '<li style="font-size:11px; color:#6B778C; display:flex; align-items:center;">';
+                            html += '<span style="background-color:' + color +
+                                '; width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px;"></span>';
+                            html += label + '</li>';
+                        });
+                        html += '</ul>';
+                        legendElem.innerHTML = html;
                     }
-                };
-                var projectCanvas = $("#projectChart").get(0).getContext("2d");
-                var projectChart = new Chart(projectCanvas, {
-                    type: 'doughnut',
-                    data: projectData,
-                    options: projectOptions,
-                    plugins: [{
-                        afterDatasetUpdate: function(chart, args, options) {
-                            const chartId = chart.canvas.id;
-                            const legendId = `${chartId}-legend`;
-                            const legendElem = document.getElementById(legendId);
-                            if (!legendElem) return;
-
-                            legendElem.innerHTML = '';
-                            const ul = document.createElement('ul');
-                            ul.style.listStyle = 'none';
-                            ul.style.padding = '0';
-                            ul.style.display = 'flex';
-                            ul.style.flexWrap = 'wrap';
-                            ul.style.justifyContent = 'center';
-                            ul.style.gap = '10px';
-
-                            for (let i = 0; i < chart.data.datasets[0].data.length; i++) {
-                                const li = document.createElement('li');
-                                li.style.fontSize = '12px';
-                                li.style.color = '#6B778C';
-                                li.style.display = 'flex';
-                                li.style.alignItems = 'center';
-
-                                const span = document.createElement('span');
-                                span.style.backgroundColor = chart.data.datasets[0].backgroundColor[
-                                    i];
-                                span.style.width = '12px';
-                                span.style.height = '12px';
-                                span.style.borderRadius = '50%';
-                                span.style.display = 'inline-block';
-                                span.style.marginRight = '5px';
-
-                                li.appendChild(span);
-                                li.appendChild(document.createTextNode(chart.data.labels[i]));
-                                ul.appendChild(li);
-                            }
-                            legendElem.appendChild(ul);
-                        }
-                    }]
-                });
-            }
+                }
+            });
         })(jQuery);
     </script>
 @endpush
