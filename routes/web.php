@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\PricingPackageController;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/portofolio/{slug}', [HomeController::class, 'showProject'])->name('project.show');
 
 Route::view('/privacy', 'privacy');
 Route::view('/terms', 'terms');

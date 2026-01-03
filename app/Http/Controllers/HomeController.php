@@ -63,4 +63,18 @@ class HomeController extends Controller
 
         return view('home', compact('services', 'projects', 'process', 'technologies', 'timeline', 'testimonials', 'testimonialItems', 'faqs', 'contacts', 'promo', 'happyClients', 'avgSatisfaction', 'projectsCount', 'yearsExperience', 'servedCities', 'packages'));
     }
+
+    public function showProject($slug)
+    {
+        $project = Project::where('slug', $slug)->where('is_active', true)->firstOrFail();
+
+        // Optional: Get other projects for "Lihat Lainnya" section
+        $otherProjects = Project::where('id', '!=', $project->id)
+            ->where('is_active', true)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+
+        return view('project.show', compact('project', 'otherProjects'));
+    }
 }

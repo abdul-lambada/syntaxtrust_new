@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             // DemoContentSeeder::class,
             // TestimonialSeeder::class,
             // TechnologySeeder::class,
+            ProjectSeeder::class,
             BackupDataSeeder::class,
         ]);
     }

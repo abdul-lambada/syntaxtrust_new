@@ -908,25 +908,20 @@
                         x-transition:enter-start="opacity-0 transform scale-95"
                         x-transition:enter-end="opacity-100 transform scale-100" data-reveal>
                         <div class="project-card-img-wrapper">
-                            @if ($prj->image)
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($prj->image) }}"
-                                    alt="{{ $prj->title }}" class="project-card-img">
-                            @else
-                                <div class="w-full h-full bg-neutral-100 grid place-items-center text-neutral-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                            @endif
+                            <img src="{{ $prj->image ? \Illuminate\Support\Facades\Storage::url($prj->image) : \Illuminate\Support\Facades\Storage::url('projects/default.png') }}"
+                                onerror="this.onerror=null;this.src='{{ \Illuminate\Support\Facades\Storage::url('projects/default.png') }}';"
+                                alt="{{ $prj->title }}" class="project-card-img">
                             <div
-                                class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                                <a href="{{ route('project.show', $prj->slug) }}"
+                                    class="bg-white text-neutral-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-neutral-100 transition-colors shadow-lg">
+                                    Detail
+                                </a>
                                 @if ($prj->link)
                                     <a href="{{ $prj->link }}" target="_blank"
-                                        class="text-white text-sm font-medium flex items-center gap-2">
-                                        Lihat Live Project
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                        class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-indigo-500 transition-colors shadow-lg flex items-center gap-2">
+                                        Live
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -944,7 +939,10 @@
                                 @endif
                             </div>
                             <h3 class="mt-3 text-lg font-bold group-hover:text-indigo-600 transition-colors">
-                                {{ $prj->title }}</h3>
+                                <a href="{{ route('project.show', $prj->slug) }}" class="block">
+                                    {{ $prj->title }}
+                                </a>
+                            </h3>
                             <p class="mt-2 text-sm text-neutral-600 line-clamp-2 leading-relaxed">{{ $prj->description }}
                             </p>
                         </div>
